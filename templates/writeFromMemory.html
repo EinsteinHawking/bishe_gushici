@@ -1,0 +1,110 @@
+<!doctype html>
+
+{% load staticfiles %}
+<html>
+<head>
+<meta charset="utf-8">
+<title>在线默写_古诗词在线学习</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/writeFromMemory.css' %}"/>
+
+</head>
+
+<body>
+	<div id="main1" class="clearFix">
+		<div class="left">
+			<h1>
+				<a href="{% url 'main' %}">诗词在线学习</a>
+			</h1>
+		</div>
+		<div class="right">
+
+			{% if username %}
+			<a href="{% url 'user_web' %}"> {{username}} </a>
+			{% else %}
+			<a href="{% url 'log' %}"> 登录</a>
+			{% endif %}
+		</div>
+	</div>
+	
+	
+	<div id="main2" class="clearFix">
+		<div class="main2cont">
+				<div class="left1">
+						<a href="{% url 'main' %}">推荐</a>
+						<a href="{% url 'works' %}">名篇</a>
+						<a href="{% url 'authors' %}">名家</a>
+						<a href="{% url 'write' %}"  style="background-color:#acaf9b;border-bottom:3px solid #f0efe2;line-height:43px;height:43px;">在线默写</a>
+					</div>
+					<div class="right1">
+						<div class="search">
+							<form>
+							<input type="text" name="value" maxlength="40" value=""
+							id="textkey"/>
+							<input type="submit" name="submit" value="搜索" id="searchkey"/>
+							</form>
+						</div>
+					</div>
+		</div>
+
+	</div>
+	<section>
+
+
+	<div id="main3" class="clearFix">
+		<form action="result/" method="post">
+		<div id="left">
+			<div class="top" style="background-color:white">
+				<div class="son1">
+						<div style="text-align:center">
+							<label class="sr-only" for="form-username">题目</label>
+							<input type="text" name="title" maxlength="60" value="" id="titleid" placeholder="{{title}}"/>
+						</div>
+				</div>
+				<div class="son1">
+					<div style="text-align:center">
+						<label class="sr-only" for="form-username">作者</label>
+						<input type="text" name="author" maxlength="60" value="" id="autherid" placeholder="{{author}}"/>
+				</div>
+				</div>
+				<textarea class="content" name="content">{{q_c}}</textarea>
+			</div>
+			<div class="bottom">
+
+				<div>
+					<div class="restart">
+						<a href="{% url 'write' %}">重新默写</a>
+					</div>
+					<div>
+						<input type="submit" name="answer" value="查看答案" id="submit">
+					</div>
+				</div>
+
+				<textarea class="content">{{result}}{{title}}{{author}}{{content}}</textarea>
+			</div>
+			<div class="result">
+				<!--<label>正确率：</label>-->
+				<!--<label>80%</label>-->
+			</div>
+
+		</div>
+		</form>
+
+
+		
+	</div>
+</section>
+<!--
+	<div class="main4">
+		<div>
+			<a href="#">作者</a>
+			<a href="#">联系我们</a>
+		</div>
+	
+	</div>
+
+-->
+
+</body>
+</html>

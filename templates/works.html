@@ -1,0 +1,179 @@
+<!doctype html>
+
+{% load staticfiles %}
+<html>
+<head>
+<meta charset="utf-8">
+<title>名篇大全_古诗词在线学习</title>
+
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/works.css' %}"/>
+</head>
+
+<body>
+	<div id="main1" class="clearFix">
+		<div class="left">
+			<h1>
+				<a href="poemLearning.html">诗词在线学习</a>
+			</h1>
+		</div>
+		<div class="right">
+			{% if username %}
+			<a href="{% url 'user_web' %}"> {{username}} </a>
+			{% else %}
+			<a href="{% url 'log' %}"> 登录</a>
+			{% endif %}
+		</div>
+	</div>
+	
+	
+	<div id="main2" class="clearFix">
+		<div class="main2cont">
+				<div class="left1">
+						<a href="{% url 'main' %}">推荐</a>
+						<a href="{% url 'works' %}"  style="background-color:#acaf9b;border-bottom:3px solid #f0efe2;line-height:43px;height:43px;">名篇</a>
+						<a href="{% url 'authors' %}">名家</a>
+						<a href="{% url 'write' %}">在线默写</a>
+					</div>
+					<div class="right1">
+						<div class="search">
+							<form action="/search/" method="get">
+							<input type="text" name="q" maxlength="40" value=""
+							id="textkey" placeholder="{{query}}"/>
+							<input type="submit" name="search" value="搜索" id="searchkey"/>
+							</form>
+						</div>
+					</div>
+		</div>
+
+	</div>
+	<section>
+
+
+	<div id="main3" class="clearFix">
+		<div id="left">
+			<div class="titletype">
+				<div class="son1">
+					<h1>"不限"
+						<span>1/1000+页</span>
+					</h1>
+				</div>
+				<div id="type1" class="son2">
+					<div class="sleft"><span>类型：</span></div>
+					<div class="sright">
+						{% for tag in tags %}
+						<a href="#" >{{tag.tag_name}}</a>
+						{% endfor %}
+					</div>
+					<div class="sright2">
+						<img id="imgType1" src="" alt="展开"> 
+					</div>
+				</div>
+				<div id="type2" class="son2">
+						<div class="sleft"><span>名家：</span></div>
+						<div class="sright">
+							<a>白居易</a>
+							<a>辛弃疾</a>
+							<a>李清照</a>
+							<a>刘禹锡</a>
+							<a>李商隐</a>
+							<a>陶渊明</a>
+							<a>孟浩然</a>
+							<a>柳宗元</a>
+							<a>王安石</a>
+							<a>欧阳修</a>
+						</div>
+						<div class="sright2">
+							<img id="imgType1" src="" alt="展开"> 
+						</div>
+				</div>
+				<div id="type3" class="son2">
+						<div class="sleft"><span>朝代：</span></div>
+						<div class="sright">
+							<a>先秦</a>
+							<a>两汉</a>
+							<a>魏晋</a>
+							<a>南北朝</a>
+							<a>隋代</a>
+							<a>唐代</a>
+							<a>五代</a>
+							<a>宋代</a>
+							<a>金朝</a>
+							<a>元代</a>
+							<a>明代</a>
+							<a>清代</a>
+							<a>近现代</a>
+						</div>
+						<div class="sright2">
+							<img id="imgType1" src="" alt="展开"> 
+						</div>
+				</div>
+				<div class="son2">
+					<div class="sleft">
+						<span>形式：</span>
+					</div>
+					<div class="sright">
+						<a>诗</a>
+						<a>词</a>
+						<a>歌</a>
+						<a>文言文</a>
+					</div>
+				</div>
+			</div>
+
+			{% for work in works %}
+			<div class="sons">
+				<div class="cont">
+					<p>
+						<a href="#">
+							<b>{{work.name}}</b>
+						</a>
+					</p>
+					<p class="source">
+						<a href="#">{{work.dynasty}}</a>
+						<span>:</span>
+						<a href="#">{{work.author}}</a>
+					</p>
+					<div class="contson">
+						{{work.content}}
+					</div>
+				</div>
+				<div class="tool">
+					<div class="collecting"></div>
+					<div class="downloading"></div>
+					<div class="sharing"></div>
+					<div class="like"></div>
+				</div>
+				<div class="tag">
+					{%for tag in work.tags%}
+					<a>{{tag}}</a>
+					{% endfor %}
+				</div>
+			</div>
+			{% endfor %}
+			<div class="page">
+			<a href="{% url 'main' %}" class="home">首页</a>
+			<a href="" class="prev">上一页</a>
+			{% for index in works.paginator.page_range %}
+
+				{% if index == works.number %}
+
+				<a href="" class="on num">{{index}}</a>
+				{% else %}
+				<a href="{% url 'workspage' index %}" class="num">{{index}}</a>
+				{% endif %}
+
+			{% endfor %}
+
+				<a href="" class="next">下一页</a>
+				<a href="" class="last">尾页</a>
+			</div>
+
+		</div>
+		
+	</div>
+</section>
+
+</body>
+</html>

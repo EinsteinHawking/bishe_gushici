@@ -1,0 +1,33 @@
+<!--测试界面-->
+<html lang="en">
+{% load staticfiles %}
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main1.css' %} ">
+</head>
+<body>
+<h1>hello,world</h1>
+
+{% for work in works %}
+
+    <div class="cont">
+        <p>
+            <a href="#">
+                <b>{{work.name}}</b>
+            </a>
+        </p>
+        <p class="source">
+            <a href="#">{{work.dynasty}}</a>
+            <span>:</span>
+            <a href="#">{{work.author}}</a>
+        </p>
+        <div class="contson">
+            {{work.content}}
+        </div>
+    </div>
+{% endfor %}
+
+<a href="{% url 'log' %}">登录</a>
+</body>
+</html>

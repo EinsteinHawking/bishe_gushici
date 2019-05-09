@@ -1,0 +1,47 @@
+#main3 .titletype{
+    width: 630px;
+    height: auto;
+    margin-top: 20px;
+    clear: both;
+    background-color: #f0efe2;
+    overflow: hidden;
+    border:1px solid #c8c7bc;
+    border-radius: 5px;
+}
+#main3 .titletype .son1{
+    clear: both;
+    height:40px;
+    line-height: 40px;
+    margin-top: 5px;
+    font-size:20px;
+    border-bottom: 1px solid #dad9d1;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+#main3 .titletype .son1  span{
+    float: right;
+    font-size: 12px;
+    height: 40px;
+    line-height: 40px;
+    margin-top: 5px;
+    font-weight: normal;
+    color: #999999;
+}
+#main3 .titletype .son2{
+    width: 630px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    clear:both;
+    overflow: hidden;
+}
+#main3 .titletype .sleft{
+    width: 50px;
+    float: left;
+    color:#275f38;
+}
+#main3 .titletype .sright{
+    float: left;
+}
+#main3 #left .sons{
+    width: 630px;
+}

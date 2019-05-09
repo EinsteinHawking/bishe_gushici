@@ -1,0 +1,46 @@
+.title{
+	height: 80px;
+	text-align: center;
+	color: red;
+	
+}
+
+.p{
+	color:red;
+    margin-left:20px;
+    display:inline-block;
+}
+.c{
+    color:red;
+    margin-left:4px;
+    display:inline-block;
+}
+.l{
+   font-size:18px;
+
+}
+.d{
+   height:35px;
+   width:300px;
+   display:inline;
+}
+.i{
+   height:30px;
+   width:300px;
+
+}
+.regist{
+	width:500px;
+
+	margin:0 auto;
+	text-align: center;
+	
+}
+.sub{
+	margin-left:100px;
+	height:40px;
+	width:250px;
+	background-color:red;
+	display:inline-block;
+	font-size: 18px;
+}

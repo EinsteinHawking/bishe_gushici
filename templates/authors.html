@@ -1,0 +1,133 @@
+<!doctype html>
+{% load staticfiles %}
+<html>
+<head>
+<meta charset="utf-8">
+<title>名家大全_古诗词在线学习</title>
+
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/authors.css' %}"/>
+
+</head>
+
+<body>
+	<div id="main1" class="clearFix">
+		<div class="left">
+			<h1>
+				<a href="{% url 'main' %}">诗词在线学习</a>
+			</h1>
+		</div>
+		<div class="right">
+			{% if username %}
+			<a href="{% url 'user_web' %}"> {{username}} </a>
+			{% else %}
+			<a href="{% url 'log' %}"> 登录</a>
+			{% endif %}
+		</div>
+	</div>
+	
+	
+	<div id="main2" class="clearFix">
+		<div class="main2cont">
+				<div class="left1">
+						<a href="{% url 'main' %}">推荐</a>
+						<a href="{% url 'works' %}">名篇</a>
+						<a href="{% url 'authors' %}"  style="background-color:#acaf9b;border-bottom:3px solid #f0efe2;line-height:43px;height:43px;">名家</a>
+						<a href="{% url 'write' %}">在线默写</a>
+					</div>
+					<div class="right1">
+						<div class="search">
+							<form action="/search/" method="get">
+							<input type="text" name="q" maxlength="40" value=""
+							id="textkey" placeholder="{{query}}"/>
+							<input type="submit" name="search" value="搜索" id="searchkey"/>
+							</form>
+						</div>
+					</div>
+		</div>
+
+	</div>
+	<section>
+
+
+	<div id="main3" class="clearFix">
+		<div class="titletype">
+			<div class="son1">
+				<h1>"不限"
+					<span>1/1000+页</span>
+				</h1>
+	
+			</div>
+			<div class="son2">
+				<div class="sleft">
+					<span>朝代：</span>
+				</div>
+				<div class="sright">
+					<span>不限</span>
+							<a>先秦</a>
+							<a>两汉</a>
+							<a>魏晋</a>
+							<a>南北朝</a>
+							<a>隋代</a>
+							<a>唐代</a>
+							<a>五代</a>
+							<a>宋代</a>
+							<a>金朝</a>
+							<a>元代</a>
+							<a>明代</a>
+							<a>清代</a>
+							<a>近现代</a>
+				</div>
+			</div>
+		</div>
+		<div id="left">
+			{% for author in authors %}
+			<div class="sons">
+				<div class="cont">
+					<p>
+						<a href="#">
+							<b>{{author.name}}</b>
+						</a>
+					</p>
+					<img src="{{author.pictureurl}}">
+					<div class="contson">
+						{{author.message}}
+					</div>
+				</div>
+				<div class="tool">
+					<div class="collecting"></div>
+					<div class="downloading"></div>
+					<div class="sharing"></div>
+					<div class="like"></div>
+				</div>
+				{% endfor %}
+
+				<div class="page">
+			<a href="{% url 'main' %}" class="home">首页</a>
+			<a href="" class="prev">上一页</a>
+			{% for index in authors.paginator.page_range %}
+
+				{% if index == authors.number %}
+
+				<a href="" class="on num">{{index}}</a>
+				{% else %}
+				<a href="{% url 'authorspage' index %}" class="num">{{index}}</a>
+				{% endif %}
+
+			{% endfor %}
+
+				<a href="" class="next">下一页</a>
+				<a href="" class="last">尾页</a>
+			</div>
+
+
+			</div>
+
+		</div>
+		
+	</div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+#main3 #left .titletype{
+    height: auto;
+    margin-top: 20px;
+    clear: both;
+    border: 1px solid #c8c7bc;
+    background-color: #f0efe2;
+    overflow: hidden;
+    border-radius: 5px;
+    padding: 10px 0px;
+}
+#main3 #left .titletype .son1{
+    clear:both;
+    height: 40px;
+    margin-top: 5px;
+    font-size: 20px;
+    border-bottom: 1px solid #dad9d1;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+#main3 #left .titletype .son1 span{
+    float:right;
+    font-size: 12px;
+    height: 40px;
+    line-height: 40px;
+    margin-top: 5px;
+    font-weight: normal;
+    color: #999;
+}
+#main3 #left .titletype .son2{
+    width:630px;
+    margin-left: 20px;
+    clear:both;
+    border-bottom: 1px dashed #dad9d1;
+    overflow: hodden;
+    padding-bottom: 10px;
+}
+#main3 #left .titletype .sleft{
+    width: 50px;
+    float:left;
+    color:#275f38;
+}
+#main3 #left .titletype .sright{
+    width:565px;
+    float: left;
+}
+#main3 #left .titletype .sright2{
+    width:15px;
+    float: right;
+    margin-top: 14px;
+}
+
+
+

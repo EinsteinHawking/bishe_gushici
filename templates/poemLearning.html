@@ -1,0 +1,150 @@
+<!--主界面-->
+<!doctype html>
+{% load staticfiles %}
+<html>
+<head>
+<meta charset="utf-8">
+<title>古诗词在线学习</title>
+
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}"/>
+
+</head>
+
+<body>
+	<div id="main1" class="clearFix">
+		<div class="left">
+			<h1>
+				<a href="{% url 'main' %}">诗词在线学习</a>
+			</h1>
+		</div>
+		<div class="right">
+			{% if username %}
+			<a href="{% url 'user_web' %}"> {{username}} </a>
+			{% else %}
+			<a href="{% url 'log' %}"> 登录</a>
+			{% endif %}
+
+		</div>
+	</div>
+	
+	
+	<div id="main2" class="clearFix">
+		<div class="main2cont">
+				<div class="left1">
+						<a href="{% url 'main' %}" style="background-color:#acaf9b;border-bottom:3px solid #f0efe2;line-height:43px;height:43px;">推荐</a>
+						<a href="{% url 'works' %}">名篇</a>
+						<a href="{% url 'authors' %}">名家</a>
+						<a href="{% url 'write' %}">在线默写</a>
+					</div>
+					<div class="right1">
+						<div class="search">
+							<form action="/search/" method="get">
+							<input type="text" name="q" maxlength="40" value=""
+							id="textkey" placeholder="{{query}}"/>
+							<input type="submit" name="search" value="搜索" id="searchkey"/>
+							</form>
+						</div>
+
+					</div>
+		</div>
+
+	</div>
+	<section>
+
+
+	<div id="main3" class="clearFix">
+		<div id="left">
+			{% for work in works %}
+			<div class="sons">
+				<div class="cont">
+					<p>
+						<a href="#">
+							<b>{{work.name}}</b>
+						</a>
+					</p>
+					<p class="source">
+						<a href="#">{{work.dynasty}}</a>
+						<span>:</span>
+						<a href="#">{{work.author}}</a>
+					</p>
+					<div class="contson">
+						{{work.content}}
+					</div>
+				</div>
+				<div class="tool">
+					<div class="collecting"></div>
+					<div class="downloading"></div>
+					<div class="sharing"></div>
+					<div class="like"></div>
+				</div>
+				<div class="tag">
+					{%for tag in work.tags%}
+					<a>{{tag}}</a>
+					{% endfor %}
+				</div>
+			</div>
+			{% endfor %}
+			<div class="page">
+			<a href="{% url 'main' %}" class="home">首页</a>
+			<a href="" class="prev">上一页</a>
+			{% for index in works.paginator.page_range %}
+
+				{% if index == works.number %}
+
+				<a href="" class="on num">{{index}}</a>
+				{% else %}
+				<a href="{% url 'index' index %}" class="num">{{index}}</a>
+				{% endif %}
+
+			{% endfor %}
+
+				<a href="" class="next">下一页</a>
+				<a href="" class="last">尾页</a>
+			</div>
+
+		</div>
+		<div id="right">
+			<div class="rightson">
+					<div class="sons">
+							<div class="title">诗文关键词</div>
+						<br/><br/>
+							<div class="cont">
+
+								{% for tag in tags %}
+
+								<a href="#" style="color:black">{{tag.tag_name}}</a>
+							{% if forloop.counter|divisibleby:'4' %}
+								<br/><br/>
+								{% endif %}
+
+
+								{% endfor %}
+
+							</div>
+						</div>
+						<div class="sons"  style="display:none">
+							<div class="title">搜索排行榜</div>
+								<br/><br/>
+							<div class="cont">
+
+								{% for tag in tags %}
+								<a href="#" style="color:black">{{tag.tag_name}}</a>
+							{% if forloop.counter|divisibleby:'4' %}
+								<br/><br/>
+								{% endif %}
+
+
+								{% endfor %}
+							</div>
+						</div>
+
+			</div>
+
+		</div>
+		
+	</div>
+</section>
+
+</body>
+</html>

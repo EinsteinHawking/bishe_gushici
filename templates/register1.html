@@ -1,0 +1,65 @@
+<!--主界面-->
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/register_css.css' %}">
+</head>
+<body>
+    <div class='title'><h1>古诗词在线学习</h1></div>
+    <form action="register" method="post">
+        <div class='regist' >
+            <div style="font-size:22px;">注册新用户</div>
+            <br/>
+			
+            <span class="p">*</span>
+            <label for="username" class="l">用户名:</label>
+            <div class="d">
+                <input name="username" type="text" class="i">
+            </div>
+            <br/><br/>
+			
+            <span class="p">*</span>
+            <label for="phonenumber" class="l">手机号:</label>
+            <div  class="d">
+                <input name="phonenumber" type="text" class="i">
+            </div>
+            <br/><br/>
+           
+            <label for="emailnumber" class="l"> 邮 箱:</label>
+            <div  class="d" >
+                <input name="emailnumber" type="text" class="i" align="right">
+            </div>
+            <br/><br/>
+			
+            <span class="c">*</span>
+            <label for="login_password" class="l">登录密码:</label>
+            <div  class="d">
+                <input name="login_password" type="text" class="i">
+            </div>
+            <br/><br/>
+			
+            <span class="c">*</span>
+            <label for="confirm_password" class="l">确认密码:</label>
+            <div  class="d">
+                <input name="confirm_password" type="text" class="i">
+            </div>
+            <br/><br/>
+			
+            <span class="p">*</span>
+            <label for="ver_code" class="l">验证码:</label>
+            <div  class="d">
+                <input id="ver_code" type="text" class="i">
+            </div>
+            <br/><br/>
+			
+          	<br/><br/>
+            <input type="submit" value="注册" class='sub'/>
+        </div>
+    </form>
+
+</body>
+</html>
