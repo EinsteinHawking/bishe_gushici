@@ -1,0 +1,49 @@
+{% extends 'user_main.html' %}
+{% block top %}
+		<div class='top'>
+			<a href="{% url 'user_web' %}" >我的收藏</a>
+			<a href="{% url 'create' %}" >我的默写</a>
+			<a href="{% url 'like' %}" >我的点赞</a>
+			<a href="{% url 'society' %}">我的创作</a>
+			<a href="{% url 'update' %}" style="color: saddlebrown">修改信息</a>
+
+		</div>
+{% endblock top %}
+{% block topa %}
+
+<div class="wrap" id="wrap">
+	<form action="register/" method="post">
+	<div class="logGet">
+			<!-- 头部提示信息 -->
+			<div class="logD logDtip">
+				<p class="p1"></p>
+			</div>
+			<!-- 输入框 -->
+			<div class="lgD">
+				<img src="img/logName.png" width="20" height="20" alt=""/>
+				<input type="text"
+					placeholder="输入用户名" name="username" />
+			</div>
+			<div class="lgD">
+				<img src="img/logPwd.png" width="20" height="20" alt=""/>
+				<input type="text"
+					placeholder="输入用户密码" name="login_password" />
+			</div>
+			<div class="lgD">
+				<img src="img/logPwd.png" width="20" height="20" alt=""/>
+				<input type="password"
+					placeholder="再次输入，确认密码" name="check_password" />
+			</div>
+			<div class="lgD">
+				<img src="img/logName.png" width="20" height="20" alt=""/>
+				<input type="text"
+					placeholder="输入手机号" name="phonenumber" />
+			</div>
+
+			<div class="logC">
+				<a href="index.html" target="_self"><button>保存</button></a>
+			</div>
+		</div>
+	</form>
+</div>
+{% endblock topa %}

@@ -18,10 +18,18 @@ urlpatterns = [
     path('authors/<int:pageid>',views.show_authors,name='authorspage'),
     path('works/', views.show_wk_page,name='works'),
     path('works/<int:pageid>',views.show_works,name='workspage'),
-    path('u/',views.user_web,name='user_web'),
+    # path('u/',views.user_web,name='user_web'),
     path('quit/',views.quit,name='quit'),
     path('search/',views.search),
     # path('search/<int:pageid>',views.search_page,name='result'),
+    path('update/',views.updateinfo,name='update'),
+    path('like/',views.mylike,name='like'),
+    path('create/',views.mycreate,name='create'),
+    path('u/',views.mycoll,name='user_web'),
+    path('society/',views.show_society,name='society'),
+    path('society/creations/',views.society,name='safe_put'),
+    path('delete/',views.delete_cr,name='delete'),
+    path('put/',views.showput,name='myput'),
 
 
 ]

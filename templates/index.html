@@ -1,5 +1,6 @@
 <!--测试界面-->
 <html lang="en">
+{% load pagetag %}
 {% load staticfiles %}
 <head>
     <meta charset="UTF-8">
@@ -8,6 +9,14 @@
 </head>
 <body>
 <h1>hello,world</h1>
+
+<form action="/updateinfo" method="POST" enctype="multipart/form-data">
+
+            <div class="updateImg">
+            <img src="{{ account.photo.url }}" alt=""/> </div>
+
+            <input name="photo" type="file" id="exampleInputFile">
+            <button id="photo" class="btn btn-danger" type="submit">上传头像</button>
 
 {% for work in works %}
 
@@ -28,6 +37,31 @@
     </div>
 {% endfor %}
 
+
 <a href="{% url 'log' %}">登录</a>
+
+  <nav aria-label="Page navigation">
+  <ul class="pagination">
+      {% if cus_list.has_previous %}
+          <li>
+              <a href="?page={{ cus_list.previous_page_number }}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+          </li>
+      {% endif %}
+
+    {%  for pg in cus_list.paginator.page_range %}
+        {% circle_page cus_list.number pg %}
+    {% endfor %}
+
+    {% if cus_list.has_next %}
+        <li>
+          <a href="?page={{ cus_list.next_page_number }}" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+        {% endif %}
+  </ul>
+</nav>
 </body>
 </html>

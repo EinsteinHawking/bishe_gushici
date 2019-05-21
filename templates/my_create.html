@@ -1,0 +1,42 @@
+{% extends 'user_main.html' %}
+{% load staticfiles %}
+{% block top %}
+		<div class='top'>
+			<a href="{% url 'user_web' %}" >我的收藏</a>
+			<a href="{% url 'create' %}" style="color: saddlebrown">我的默写</a>
+			<a href="{% url 'like' %}" >我的点赞</a>
+			<a href="{% url 'myput' %}">我的创作</a>
+			<a href="{% url 'update' %}">修改信息</a>
+
+		</div>
+{% endblock top %}
+{% block topa %}
+<div id="left">
+			{% for work in works %}
+			<div class="sons">
+				<div class="cont">
+					<p>
+
+							<b>{{work.workname}}</b>
+
+					</p>
+					<p class="source">
+						{{work.wk_dynasty}}
+						<span>:</span>
+						{{work.wk_author}}
+					</p>
+					<div class="contson">
+						{{work.wk_content}}
+					</div>
+				</div>
+				<div class="tool" style="width:550">
+					<div class="delete" style="float:right;margin-right:20px"><a href="{% url 'delete' %}"><img src="{% static 'img/删除.png' %}" class="icon" style="width:16px"></a></div>
+					<div class="delete" style="float:right;margin-right:20px"><a href="{% url 'delete' %}"><img src="{% static 'img/重新评卷.png' %}" class="icon" style="width:16px"></a></div>
+				</div>
+				<div class="tag">
+						<p style="float:right;font-size:13px;">{{work.wk_time}}</p>
+				</div>
+			</div>
+			{% endfor %}
+</div>
+{% endblock topa %}

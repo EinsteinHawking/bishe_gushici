@@ -36,6 +36,7 @@
 						<a href="{% url 'works' %}">名篇</a>
 						<a href="{% url 'authors' %}">名家</a>
 						<a href="{% url 'write' %}">在线默写</a>
+						<a href="{% url 'society' %}">诗词社区</a>
 					</div>
 					<div class="right1">
 						<div class="search">
@@ -72,22 +73,25 @@
 						{{work.content}}
 					</div>
 				</div>
-				<div class="tool">
-					<div class="collecting"></div>
-					<div class="downloading"></div>
-					<div class="sharing"></div>
-					<div class="like"></div>
+				<div class="tool" style="width:550">
+					<div class="collecting" style="float:right"><img src="{% static 'img/未收藏.png' %}" class="icon" style="width:23px"></div>
+					<div class="like" style="float:right;margin-right:20px"><img src="{% static 'img/不喜欢.png' %}" class="icon" style="width:20px"></div>
 				</div>
 				<div class="tag">
 					{%for tag in work.tags%}
-					<a>{{tag}}</a>
+					<a href="">{{tag}}</a>
 					{% endfor %}
 				</div>
 			</div>
 			{% endfor %}
 			<div class="page">
 			<a href="{% url 'main' %}" class="home">首页</a>
+			{% if works.has_previous %}
+			<a href="{% url 'index' works.previous_page_number %}" class="prev">上一页</a>
+			{% else %}
 			<a href="" class="prev">上一页</a>
+			{% endif %}
+
 			{% for index in works.paginator.page_range %}
 
 				{% if index == works.number %}
@@ -98,9 +102,13 @@
 				{% endif %}
 
 			{% endfor %}
+			{% if works.has_next %}
+				<a href="{% url 'index' works.next_page_number %}" class="next">下一页</a>
+			{% else %}
+				<a href="{% url 'index' end_page %}" class="next">下一页</a>
+			{% endif %}
 
-				<a href="" class="next">下一页</a>
-				<a href="" class="last">尾页</a>
+				<a href="{% url 'index' end_page %}" class="last">尾页</a>
 			</div>
 
 		</div>

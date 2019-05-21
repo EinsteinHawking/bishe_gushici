@@ -1,0 +1,42 @@
+{% extends 'user_main.html' %}
+{% block top %}
+		<div class='top'>
+			<a href="{% url 'user_web' %}" >我的收藏</a>
+			<a href="{% url 'create' %}">我的默写</a>
+			<a href="{% url 'like' %}" style="color: saddlebrown">我的点赞</a>
+			<a href="{% url 'myput' %}">我的创作</a>
+			<a href="{% url 'update' %}">修改信息</a>
+		</div>
+{% endblock top %}
+
+{% block topa %}
+<div id="left">
+			{% for work in works %}
+			<div class="sons">
+				<div class="cont">
+					<p>
+						<a href="#">
+							<b>{{work.name}}</b>
+						</a>
+					</p>
+					<p class="source">
+						<a href="#">{{work.dynasty}}</a>
+						<span>:</span>
+						<a href="#">{{work.author}}</a>
+					</p>
+					<div class="contson">
+						{{work.content}}
+					</div>
+				</div>
+				<div class="tool" style="width:550">
+
+				</div>
+				<div class="tag">
+					{%for tag in work.tags%}
+					<a>{{tag}}</a>
+					{% endfor %}
+				</div>
+			</div>
+			{% endfor %}
+</div>
+{% endblock topa %}

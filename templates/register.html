@@ -8,6 +8,10 @@
 	margin: 0;
 	padding: 0;
 }
+.title a{
+	text-decoration:none;
+	color:white;
+}
 #wrap {
     background-color: #c8c7bc;
 	height: 719px;
@@ -31,7 +35,7 @@
 	position: relative;
 }
 #wrap .logGet {
-	height: 460px;
+	height: 520px;
 	width: 400px;  
 	position: absolute;
 	background-color: #FFFFFF;
@@ -165,7 +169,7 @@
  
 <body>
 <div class="header" id="head">
-  <div class="title">古诗词在线学习</div>
+  <div class="title"><a href="{% url 'main' %}">古诗词在线学习</a></div>
 	
 </div>
 	
@@ -186,6 +190,11 @@
 				<img src="img/logPwd.png" width="20" height="20" alt=""/>
 				<input type="text"
 					placeholder="输入用户密码" name="login_password" />
+			</div>
+			<div class="lgD">
+				<img src="img/logPwd.png" width="20" height="20" alt=""/>
+				<input type="password"
+					placeholder="再次输入，确认密码" name="check_password" />
 			</div>
 			<div class="lgD">
 				<img src="img/logName.png" width="20" height="20" alt=""/>

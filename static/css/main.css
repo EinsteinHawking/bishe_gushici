@@ -69,14 +69,14 @@ a:hover{
 	padding-top: 10px;
 }
 #main2 .left1{
-	width: 400px;
+	width: 600px;
 	float: left;
 }
 #main2 .left1 a{
 	font-size: 21px;
 	line-height: 42px;
 	height: 44px;
-	width: 90px;
+	width: 18%;
 	text-align: center;
 	color: #000;
 	font-weight: bold;

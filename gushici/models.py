@@ -1,5 +1,6 @@
 from django.db import models
 import mongoengine
+import django.utils.timezone as timezone
 # Create your models here.
 '''
 class New_Manage(models.Manager):
@@ -13,7 +14,8 @@ class User(mongoengine.Document):
     #picture = mongoengine.StringField()
     phone = mongoengine.IntField()
     c_time = mongoengine.DateTimeField("创建日期",auto_now_add=True)
-
+    my_coll = mongoengine.StringField()
+    my_like = mongoengine.StringField()
     user_objs = models.Manager()
     meta = {'collection': 'users'}
 
@@ -39,3 +41,27 @@ class Tags(mongoengine.Document):
     tag_url=mongoengine.StringField()
     count = mongoengine.IntField()
     meta = {'collection': 'tags'}
+
+class Sessions(mongoengine.Document):
+    session = mongoengine.StringField()
+    meta = {'collection':'sessions'}
+
+class Creates(mongoengine.Document):
+    user = mongoengine.StringField()
+    content = mongoengine.StringField()
+    create_time = mongoengine.DateTimeField(default = timezone.now)
+
+class Writes(mongoengine.Document):
+    username = mongoengine.StringField()
+    workname = mongoengine.StringField()
+    wk_author = mongoengine.StringField()
+    wk_dynasty = mongoengine.StringField()
+    wk_content = mongoengine.StringField()
+    wk_time = mongoengine.DateTimeField(default = timezone.now)
+
+# 上传图片
+# class UserInfo(models.Model):
+#     user=models.OneToOneField(User)
+#     photo=models.ImageField(upload_to='photos',default='user1.jpg')
+#     def __unicode__(self):
+#         return self.user.username

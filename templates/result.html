@@ -19,11 +19,12 @@
 			</h1>
 		</div>
 		<div class="right">
-			{% for user in users %}
-			<a href="{% url 'user_web' %}"> {{user.username}} </a>
-			{% empty %}
+			{% if username %}
+			<a href="{% url 'user_web' %}"> {{username}} </a>
+			{% else %}
 			<a href="{% url 'log' %}"> 登录</a>
-			{% endfor %}
+			{% endif %}
+
 
 		</div>
 	</div>
@@ -32,10 +33,11 @@
 	<div id="main2" class="clearFix">
 		<div class="main2cont">
 				<div class="left1">
-						<a href="{% url 'main' %}" style="background-color:#acaf9b;border-bottom:3px solid #f0efe2;line-height:43px;height:43px;">推荐</a>
+						<a href="{% url 'main' %}" >推荐</a>
 						<a href="{% url 'works' %}">名篇</a>
 						<a href="{% url 'authors' %}">名家</a>
 						<a href="{% url 'write' %}">在线默写</a>
+						<a href="{% url 'society' %}">诗词社区</a>
 					</div>
 					<div class="right1">
 						<div class="search">

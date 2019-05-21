@@ -7,11 +7,13 @@ body{
 	background-color: #c8c7bc;
 	
 }
+
 .clearFix:after{
 	content: "";
 	display: block;
 	clear: both;
 }
+
 a{
 	color:#19537d;
 	text-decoration: none;
@@ -93,15 +95,129 @@ a:hover{
 	float: left;
 }
 
-
 .main2 .top a{
 	font-size: 21px;
 	line-height: 42px;
 	height: 44px;
-	width: 18%;
+	width: 19%;
 	text-align: center;
 	color: #000;
 	font-weight: bold;
 	display: inline-block;
 	line-height:60px;
+}
+
+#main3{
+	width: 1275px;;
+	background-color: #c8c7bc;
+	height: auto;
+
+	margin-left: 200px;
+
+}
+#main3 #left{
+	width:600px;
+	padding: 0px;
+	margin: 0px;
+	float: left;
+}
+#main3 #left .sons{
+	background-color: #FFFFFF;
+	height: auto;
+	overflow: hidden;
+	margin-top: 60px;
+	border: 1px solid #c8c7bc;
+	border-radius: 5px;
+	width: 600px;
+	float: left;
+}
+#main3 #left .sons .cont{
+	height: auto;
+	margin-top:15px;
+	font-size: 14px;
+	margin-left: 20px;
+	margin-right: 20px;
+	line-height: 200%;
+	overflow: hidden;
+
+}
+#main3  #left .sons .tool{
+	height: 32px;
+	margin-top: 20px;
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-bottom: 3px;
+}
+#main3  #left .sons .tag{
+	height: auto;
+    margin:20px;
+	margin-top: 0px;
+	margin-bottom: 10px;
+	border-top: 1px solid #dad9d1;
+	overflow: hidden;
+	padding-top: 10px;
+}
+#main3  #left .sons .tag a{
+	float: left;
+	color: #999;
+	line-height: 20px;
+	height: 20px;
+	padding: 1px;
+	margin-right: 1em;
+	border: 1px solid #CBC6C6;
+}
+
+#main3 #right{
+	width:auto;
+	float: right;
+
+
+}
+#main3 #right .rightson{
+	width: 360px;
+	float: right;
+	margin-right: 0px;
+}
+
+#main3 #right .rightson .sons{
+	height: auto;
+	width: 298px;
+	margin-top: 60px;
+	float: left;
+	background-color: #fff;
+	overflow: hidden;
+	border: 1px solid #c8c7bc;
+	border-radius: 5px;
+	padding-left:10px;
+}
+#main3 #right .rightson .sons .title{
+	height: 25px;
+	line-height: 25px;
+	clear: both;
+	font-size: 18px;
+	margin-top: 20px;
+	margin-left: 5px;
+	overflow: hidden;
+	font-weight:border;
+}
+#main3 #right .rightson .sons .cont{
+	height: auto;
+	clear: both;
+	overflow: hidden;
+	padding-bottom: 20px;
+}
+
+#main3 #right .rightson .sons .cont a{
+	float: left;
+	color: #888;
+	font-size:14px;
+	line-height: 20px;
+	height: 20px;
+	padding: 1px;
+	margin-right: 1em;
+}
+
+a:hover{
+	color: #19537d;
+	font-weight: bolder;
 }

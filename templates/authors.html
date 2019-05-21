@@ -35,6 +35,7 @@
 						<a href="{% url 'works' %}">名篇</a>
 						<a href="{% url 'authors' %}"  style="background-color:#acaf9b;border-bottom:3px solid #f0efe2;line-height:43px;height:43px;">名家</a>
 						<a href="{% url 'write' %}">在线默写</a>
+						<a href="{% url 'society' %}">诗词社区</a>
 					</div>
 					<div class="right1">
 						<div class="search">
@@ -52,10 +53,10 @@
 
 
 	<div id="main3" class="clearFix">
-		<div class="titletype">
+		<div class="titletype" style="margin-bottom:40px;">
 			<div class="son1">
 				<h1>"不限"
-					<span>1/1000+页</span>
+					<!--<span>1/1000+页</span>-->
 				</h1>
 	
 			</div>
@@ -83,23 +84,29 @@
 		</div>
 		<div id="left">
 			{% for author in authors %}
-			<div class="sons">
+			<div class="sons" style="margin-top:20px;">
 				<div class="cont">
 					<p>
 						<a href="#">
 							<b>{{author.name}}</b>
 						</a>
 					</p>
-					<img src="{{author.pictureurl}}">
-					<div class="contson">
+					<div style="width:590px;margin-top:10px;">
+
+					<div style="float:left;width:110px;">
+						<img src="{{author.pictureurl}}">
+					</div>
+
+					<div class="contson" style="float:right;width:440px;">
 						{{author.message}}
 					</div>
+
+					</div>
+
 				</div>
-				<div class="tool">
-					<div class="collecting"></div>
-					<div class="downloading"></div>
-					<div class="sharing"></div>
-					<div class="like"></div>
+				<div class="tool" style="width:550">
+					<div class="collecting" style="float:right"><img src="{% static 'img/未收藏.png' %}" class="icon" style="width:23px"></div>
+					<div class="like" style="float:right;margin-right:20px"><img src="{% static 'img/不喜欢.png' %}" class="icon" style="width:20px"></div>
 				</div>
 				{% endfor %}
 

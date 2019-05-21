@@ -1,0 +1,151 @@
+<!doctype html>
+
+{% load staticfiles %}
+<html>
+<head>
+<meta charset="utf-8">
+<title>在线默写_古诗词在线学习</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/writeFromMemory.css' %}"/>
+<style type="text/css">
+    .tijiao{
+     margin-top:50px;
+     background-color:white;
+     padding-bottom:30px;
+     width:600px;
+     border:1px solid black;
+     margin-left:0px;
+     margin-right:0px;
+     }
+     .tijiao textarea{
+     width:595px;
+     height:150px;
+     border:1px solid black;
+     border-bottom:2px solid #5d6146;
+     font-size:20px;
+     font-family:'楷体';
+     }
+     .tijiao .butt button{
+     width:50px;
+     float:right;
+     height:30px;
+     background-color:white;
+     margin:0px;
+     text-decoration:none;
+     border-bottom-style:none;
+     border-top-style:none;
+     border-left-style:none;
+     border-right-style:none;
+
+     }
+    .tijiao .butt{
+      width:600px;
+      background-color:white;
+     }
+    .sons{
+	background-color: #FFFFFF;
+	height: auto;
+	overflow: hidden;
+	margin-top: 60px;
+	border: 1px solid #c8c7bc;
+	border-radius: 5px;
+	width: 600px;
+	height:150px;
+}
+.cont{
+	height: auto;
+	margin-top:15px;
+	font-size: 14px;
+	margin-left: 20px;
+	margin-right: 20px;
+	line-height: 200%;
+	overflow: hidden;
+
+}
+
+</style>
+</head>
+
+<body>
+	<div id="main1" class="clearFix">
+		<div class="left">
+			<h1>
+				<a href="{% url 'main' %}">诗词在线学习</a>
+			</h1>
+		</div>
+		<div class="right">
+
+			{% if username %}
+			<a href="{% url 'user_web' %}"> {{username}} </a>
+			{% else %}
+			<a href="{% url 'log' %}"> 登录</a>
+			{% endif %}
+		</div>
+	</div>
+
+
+	<div id="main2" class="clearFix">
+		<div class="main2cont">
+				<div class="left1">
+						<a href="{% url 'main' %}">推荐</a>
+						<a href="{% url 'works' %}">名篇</a>
+						<a href="{% url 'authors' %}">名家</a>
+						<a href="{% url 'write' %}">在线默写</a>
+                        <a href="{% url 'society' %}"  style="background-color:#acaf9b;border-bottom:3px solid #f0efe2;line-height:43px;height:43px;">诗词社区</a>
+					</div>
+					<div class="right1">
+						<div class="search">
+							<form>
+							<input type="text" name="value" maxlength="40" value=""
+							id="textkey"/>
+							<input type="submit" name="submit" value="搜索" id="searchkey"/>
+							</form>
+						</div>
+					</div>
+		</div>
+
+	</div>
+	<section>
+
+
+	<div id="main3" class="clearFix">
+		<form action="creations/" method="post">
+        <div class="tijiao">
+           <textarea rows="10" cols="30" name="content" ></textarea>
+            <div class="butt">
+                <a href="{% url 'safe_put' %}"><button>提交</button></a>
+            </div>
+        </div>
+		</form>
+          {% for create in creates %}
+			<div class="sons">
+				<div class="cont">
+                    <div style="height:30px;border-bottom:1px solid red">
+                        <p style="float:left">{{create.user}}:</p>
+                        <p style="float:right">{{create.create_time}}</p>
+                    </div>
+
+					<div class="contson" style="height:70px;font-family:'楷体';font-size:18px;">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{create.content}}
+					</div>
+				</div>
+				<div class="tool" style="width:550">
+                    <div class="delete" style="float:right;margin-right:20px"><a href="{% url 'delete' %}"><img src="{% static 'img/删除.png' %}" class="icon" style="width:20px"></a></div>
+					<div class="like" style="float:right;margin-right:20px"><img src="{% static 'img/不喜欢.png' %}" class="icon" style="width:20px"></div>
+				</div>
+
+			</div>
+			{% endfor %}
+        <div style="height:50px">
+
+        </div>
+
+
+
+	</div>
+</section>
+
+
+</body>
+</html>
