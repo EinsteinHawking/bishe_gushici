@@ -8,9 +8,37 @@
 			<a href="{% url 'like' %}" >我的点赞</a>
 			<a href="{% url 'myput' %}" style="color: saddlebrown">我的创作</a>
 			<a href="{% url 'update' %}">修改信息</a>
-
 		</div>
+
+
 {% endblock top %}
+
+{% block script_top %}
+
+   <script>
+	$(".delete").on("click",function(){
+
+		var pid= document.getElementByClassName("put_id").innerHTML;
+		alert(pid);
+
+		$ajax({
+			url:"delete_put/",
+			type:"POST",
+			data:{
+				putid = pid;
+			}
+			success:function(data){
+
+				alter("123");
+			}
+		})
+
+
+	})
+
+    </script>
+{% endblock script_top %}
+
 {% block topa %}
 <div id="left">
 			{% for create in creates %}
@@ -30,14 +58,43 @@
 					<div class="contson">
 						&nbsp;&nbsp;{{create.content}}
 					</div>
+					<p hidden class="put_id">{{create.id}}</p>
 				</div>
 				<div class="tool" style="width:550">
-                        <div class="delete" style="float:right;margin-right:20px"><a href="{% url 'delete' %}"><img src="{% static 'img/删除.png' %}" class="icon" style="width:16px"></a></div>
+					<a href="{% url 'delput' create.id %}"><div class="delete" style="float:right;margin-right:20px" ><img src="{% static 'img/删除.png' %}" class="icon" style="width:16px"></div></a>
 				</div>
 				<div class="tag">
 						<p style="float:right;font-size:13px;">{{create.create_time}}</p>
 				</div>
 			</div>
 			{% endfor %}
+
 </div>
 {% endblock topa %}
+
+
+{% block script %}
+
+<script type="text/javascript">
+
+document.getElementsByClassName('like')[0].addEventListener('click', () => {
+
+  	let params = new URLSearchParams();
+	params.append(‘id‘,xx)
+			axios({
+			url:‘http://127.0.0.1:8000/delete_put‘,
+			method:‘post‘,
+			data:params,
+			responseType:"text",
+		})
+
+		.then(function(obj){
+		})
+    })
+
+
+
+
+  </script>
+
+{% endblock script %}

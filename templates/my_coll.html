@@ -19,7 +19,7 @@
 				<div class="cont">
 					<p>
 						<a href="#">
-							<b>{{work.name}}</b>
+							<b>{{work.wkname}}</b>
 						</a>
 					</p>
 					<p class="source">
@@ -32,12 +32,18 @@
 					</div>
 				</div>
 				<div class="tool" style="width:550">
-
+					<a href="">
+            		&nbsp;<img  src="{% static 'img/shoucang.png' %}" class="icon" style="width:20px;float:right">
+					</a>
 				</div>
 				<div class="tag">
 					{%for tag in work.tags%}
 					<a>{{tag}}</a>
 					{% endfor %}
+
+					<div class="time">
+						<p style="float:right;font-size:13px;">{{work.collect_time}}</p>
+					</div>
 				</div>
 			</div>
 			{% endfor %}

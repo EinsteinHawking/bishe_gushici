@@ -1,4 +1,5 @@
 {% extends 'user_main.html' %}
+{% load staticfiles %}
 {% block top %}
 		<div class='top'>
 			<a href="{% url 'user_web' %}" >我的收藏</a>
@@ -12,11 +13,12 @@
 {% block topa %}
 <div id="left">
 			{% for work in works %}
+
 			<div class="sons">
 				<div class="cont">
 					<p>
 						<a href="#">
-							<b>{{work.name}}</b>
+							<b>{{work.wkname}}</b>
 						</a>
 					</p>
 					<p class="source">
@@ -29,14 +31,22 @@
 					</div>
 				</div>
 				<div class="tool" style="width:550">
-
+					<a href="">
+            		&nbsp;<img  src="{% static 'img/喜欢.png' %}" class="icon" style="width:20px;float:right">
+					</a>
 				</div>
 				<div class="tag">
 					{%for tag in work.tags%}
-					<a>{{tag}}</a>
+					<a href="">{{tag}}</a>
 					{% endfor %}
+
+					<div class="time">
+						<p style="float:right;font-size:13px;">{{work.like_time}}</p>
 				</div>
+				</div>
+
 			</div>
+
 			{% endfor %}
 </div>
 {% endblock topa %}

@@ -8,6 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}"/>
 	<link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}"/>
 	<link rel="stylesheet" type="text/css" href="{% static 'css/writeFromMemory.css' %}"/>
+	<link rel="stylesheet" href="https://unpkg.com/animate.css@3.5.2/animate.min.css"/>
 <style type="text/css">
     .tijiao{
      margin-top:50px;
@@ -69,7 +70,7 @@
 
 <body>
 	<div id="main1" class="clearFix">
-		<div class="left">
+		<div class="left animated flipInX">
 			<h1>
 				<a href="{% url 'main' %}">诗词在线学习</a>
 			</h1>
@@ -109,7 +110,7 @@
 	<section>
 
 
-	<div id="main3" class="clearFix">
+	<div id="main3" class="clearFix animated fadeIn">
 		<form action="creations/" method="post">
         <div class="tijiao">
            <textarea rows="10" cols="30" name="content" ></textarea>
@@ -131,7 +132,7 @@
 					</div>
 				</div>
 				<div class="tool" style="width:550">
-                    <div class="delete" style="float:right;margin-right:20px"><a href="{% url 'delete' %}"><img src="{% static 'img/删除.png' %}" class="icon" style="width:20px"></a></div>
+                    <div class="delete" style="float:right;margin-right:20px"><a href="{% url 'delcre' create.id %}"><img src="{% static 'img/删除.png' %}" class="icon" style="width:20px"></a></div>
 					<div class="like" style="float:right;margin-right:20px"><img src="{% static 'img/不喜欢.png' %}" class="icon" style="width:20px"></div>
 				</div>
 

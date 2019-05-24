@@ -1,0 +1,154 @@
+{% extends 'writeFromMemory.html' %}
+
+{% block jquery %}
+
+<style type="text/css">
+#show,#start,#restart{
+
+        width: 80px;
+        height:25
+        padding:5px;
+
+        background-color: #fff;
+        border-color: #fff;
+        color: #0f0f0f;
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        border-radius: 10px; /* future proofing */
+        -khtml-border-radius: 10px; /* for old Konqueror browsers */
+        text-align: center;
+        vertical-align: middle;
+        border: 1px solid transparent;
+
+        font-size:16px;
+        font-weight:bolder;
+        margin-top: -5px;
+        outline: none;
+
+
+}
+
+</style>
+
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+
+    </script>
+
+    <script>
+
+        $(document).ready(function(){
+            $("#hide").click(function(){
+                $("p").hide(1000,"linear",function(){
+                alter("Hide()完成")
+                });
+            });
+
+            $("#show").click(function(){
+                $("p").toggle(200);
+            });
+        });
+
+    </script>
+
+{% endblock jquery %}
+
+{% block script %}
+    <script>
+        function check(){
+        var an = document.getElementsByClassName("answer");
+        console.log(an);
+        for(var i = 0;i<an.length;i++)
+            an[i].style.display="block";
+        }
+
+        function hide(){
+        var an = document.getElementsByClassName("answer");
+        console.log(an);
+        for(var i = 0;i<an.length;i++)
+            an[i].style.display="none";
+        }
+    </script>
+
+
+{% endblock script %}
+
+{% block con1 %}
+
+<section>
+<div id="main3" class="clearFix animated fadeIn">
+        <div style="width:100%">
+            <div style="float:right;margin-top:10px;margin-right:100px;line-height:2;height:30px;">
+                <a href="{% url 'write' %}" style="color: #5d6141"><strong style="font-weight:bolder;">切换到</strong>全篇默写模式</a>
+            </div>
+        </div>
+
+
+
+        <form action="start/" method="post">
+
+            <div id="left" style="border:2px solid;margin-top:50px;background-color:white">
+            <div class="son1" style="width:540px;padding-top:2px;">
+
+                <div style="display:inline-block;float:left">
+                    <label class="sr-only" for="form-username">题目</label>
+                    <input type="text" name="title" maxlength="60" value="{{title}}" id="titleid" placeholder="{{title}}"/>
+                </div>
+                <div style="display:inline-block;float:right">
+                    <div class="restart" style="display:inline-block">
+                        <!--<a href="{% url 'start' %}">开始默写</a>-->
+                        <button id="start" type="submit">开始默写</button>
+						<!--<input type="submit" name="answer" value="开始默写" id="submit">-->
+					</div>
+
+					<div class="restart" style="display:inline-block">
+						<a href="{% url 'tiankong' %}"><button id="restart" type="button">重新默写</button></a>
+					</div>
+
+                    <div class="restart" style="display:inline-block">
+                        <!--<a onclick="check()">查看结果</a>-->
+                        <button id="show" type="button">查看答案</button>
+
+					</div>
+
+                    <!--<div class="restart" style="display:inline-block">-->
+                        <!--<a onclick="hide()">隐藏答案</a>-->
+
+					<!--</div>-->
+				</div>
+            </div>
+
+            <div style="margin-top:50px;margin-bottom:50px;height:auto;border-top:1px solid;font-size:20px;padding-top:20px;">
+                {{error}}
+                {% for st in str %}
+                <div>
+                    {% if forloop.counter|divisibleby:'2' %}
+                    <div style="margin-top:2px;">
+                        <p class='answer' style="display:none;margin-left:150px;line-height:1.5;background-color:red;width:161px;height:25px;font-weight:bolder"> {{st}} </p>
+                    </div>
+
+                    {% else %}
+                        {{st}},
+
+                        <input type="text" style="height:20px">
+                    {% endif %}
+                    <br/>
+                </div>
+
+
+
+                {% endfor %}
+
+
+            </div>
+
+
+		</div>
+		</form>
+
+
+
+	</div>
+</section>
+
+{% endblock con1 %}
+

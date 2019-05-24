@@ -1,0 +1,67 @@
+{% extends 'writeFromMemory.html' %}
+
+{% block con1 %}
+<section>
+
+<div id="main3" class="clearFix animated fadeIn" >
+            <div style="width:100%">
+            <div style="float:right;margin-top:10px;margin-right:100px;line-height:2;height:30px;">
+                <a href="{% url 'tiankong' %}" style="color: #5d6141"><strong style="font-weight:bolder;">切换到</strong>填空模式</a>
+            </div>
+        </div>
+
+		<form action="result/" method="post">
+		<div id="left">
+			<div class="top" style="background-color:white">
+				<div class="son1">
+						<div style="text-align:center">
+							<label class="sr-only" for="form-username">题目</label>
+							<input type="text" name="title" maxlength="60" value="" id="titleid" placeholder="{{title}}"/>
+						</div>
+				</div>
+				<div class="son1">
+					<div style="text-align:center">
+						<label class="sr-only" for="form-username">作者</label>
+						<input type="text" name="author" maxlength="60" value="" id="autherid" placeholder="{{author}}"/>
+				</div>
+				</div>
+				<textarea class="content" name="content">{{q_c}}</textarea>
+			</div>
+			<div class="bottom">
+
+				<div>
+					<div class="restart">
+						<a href="{% url 'write' %}">重新默写</a>
+					</div>
+					<div>
+						<input type="submit" name="answer" value="查看答案" id="submit">
+					</div>
+				</div>
+
+				<textarea class="content">{{result}}{{title}}{{author}}{{content}}</textarea>
+			</div>
+			<div class="result">
+				<!--<label>正确率：</label>-->
+				<!--<label>80%</label>-->
+			</div>
+
+		</div>
+		</form>
+
+
+
+	</div>
+</section>
+<!--
+	<div class="main4">
+		<div>
+			<a href="#">作者</a>
+			<a href="#">联系我们</a>
+		</div>
+
+	</div>
+
+-->
+
+
+{% endblock con1 %}

@@ -8,12 +8,12 @@
 
 	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}"/>
 	<link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}"/>
-
+	<link rel="stylesheet" href="https://unpkg.com/animate.css@3.5.2/animate.min.css"/>
 </head>
 
 <body>
 	<div id="main1" class="clearFix">
-		<div class="left">
+		<div class="left animated flipInX">
 			<h1>
 				<a href="{% url 'main' %}">诗词在线学习</a>
 			</h1>
@@ -61,14 +61,14 @@
 			<div class="sons">
 				<div class="cont">
 					<p>
-						<a href="#">
+						<a href="{% url 'tagfilt' work.name %}">
 							<b>{{work.name}}</b>
 						</a>
 					</p>
 					<p class="source">
-						<a href="#">{{work.dynasty}}</a>
+						<a href="{% url 'tagfilt' work.dynasty %}">{{work.dynasty}}</a>
 						<span>:</span>
-						<a href="#">{{work.author}}</a>
+						<a href="{% url 'tagfilt' work.author %}">{{work.author}}</a>
 					</p>
 					<div class="contson">
 						{{work.content}}
@@ -82,28 +82,28 @@
 				</div>
 				<div class="tag">
 					{%for tag in work.tags%}
-					<a>{{tag}}</a>
+					<a href="{% url 'tagfilt' tag %}">{{tag}}</a>
 					{% endfor %}
 				</div>
 			</div>
 			{% endfor %}
-			<div class="page">
-			<a href="{% url 'main' %}" class="home">首页</a>
-			<a href="" class="prev">上一页</a>
-			{% for index in works.paginator.page_range %}
+			<!--<div class="page">-->
+			<!--<a href="{% url 'main' %}" class="home">首页</a>-->
+			<!--<a href="" class="prev">上一页</a>-->
+			<!--{% for index in works.paginator.page_range %}-->
 
-				{% if index == works.number %}
+				<!--{% if index == works.number %}-->
 
-				<a href="" class="on num">{{index}}</a>
-				{% else %}
-				<a href="{% url 'result' index %}" class="num">{{index}}</a>
-				{% endif %}
+				<!--<a href="" class="on num">{{index}}</a>-->
+				<!--{% else %}-->
+				<!--<a href="{% url 'result' index %}" class="num">{{index}}</a>-->
+				<!--{% endif %}-->
 
-			{% endfor %}
+			<!--{% endfor %}-->
 
-				<a href="" class="next">下一页</a>
-				<a href="" class="last">尾页</a>
-			</div>
+				<!--<a href="" class="next">下一页</a>-->
+				<!--<a href="" class="last">尾页</a>-->
+			<!--</div>-->
 
 		</div>
 		<div id="right">
@@ -115,8 +115,9 @@
 
 								{% for tag in tags %}
 
-								<a href="#" style="color:black">{{tag.tag_name}}</a>
-							{% if forloop.counter|divisibleby:'4' %}
+								<a href="{% url 'tagfilt' tag.tag_name %}" style="color:black">{{tag.tag_name}}</a>
+
+								{% if forloop.counter|divisibleby:'4' %}
 								<br/><br/>
 								{% endif %}
 
@@ -131,11 +132,11 @@
 							<div class="cont">
 
 								{% for tag in tags %}
-								<a href="#" style="color:black">{{tag.tag_name}}</a>
-							{% if forloop.counter|divisibleby:'4' %}
+								<a href="{% url 'tagfilt' tag.tag_name %}" style="color:black">{{tag.tag_name}}</a>
+
+								{% if forloop.counter|divisibleby:'4' %}
 								<br/><br/>
 								{% endif %}
-
 
 								{% endfor %}
 							</div>

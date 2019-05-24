@@ -29,7 +29,22 @@ urlpatterns = [
     path('society/',views.show_society,name='society'),
     path('society/creations/',views.society,name='safe_put'),
     path('delete/',views.delete_cr,name='delete'),
+    path('del/<str:workname>',views.delete_cr,name='del'),
     path('put/',views.showput,name='myput'),
 
+    path('delete_put/',views.delete_put),
+    path('delput/<str:putid>',views.delete_put,name="delput"),
+
+    path('delcre/<str:putid>',views.delete_cre,name="delcre"),
+
+
+    path('tag/',views.show_tag,name='showtag'),
+    path('tag/<str:tagname>',views.tagswk,name='tagfilt'),
+
+    path('tiankong/',views.tiankong,name='tiankong'),
+    path('tiankong/start/',views.starttiankong,name='start'),
+
+    path('like/<str:workname>',views.safelike,name='like'),
+    path('collect/<str:workname>',views.safecollect,name='collect'),
 
 ]

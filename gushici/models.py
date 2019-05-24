@@ -25,7 +25,8 @@ class Work(mongoengine.Document):
     dynasty = mongoengine.StringField()
     content = mongoengine.StringField()
     tags = mongoengine.ListField()
-
+    # islike = mongoengine.BooleanField()
+    # iscollect = mongoengine.BooleanField()
     wk_objs = models.Manager()
     meta = {'collection':'works'}
 
@@ -58,6 +59,32 @@ class Writes(mongoengine.Document):
     wk_dynasty = mongoengine.StringField()
     wk_content = mongoengine.StringField()
     wk_time = mongoengine.DateTimeField(default = timezone.now)
+
+class Collections(mongoengine.Document):
+    user = mongoengine.StringField()
+    wkname = mongoengine.StringField()
+    author = mongoengine.StringField()
+    dynasty = mongoengine.StringField()
+    content = mongoengine.StringField()
+    tags = mongoengine.ListField()
+    collect_time = mongoengine.DateTimeField(default = timezone.now)
+    meta = {'collection': 'collections'}
+
+class Likes(mongoengine.Document):
+    user = mongoengine.StringField()
+    wkname = mongoengine.StringField()
+    author = mongoengine.StringField()
+    dynasty = mongoengine.StringField()
+    content = mongoengine.StringField()
+    tags = mongoengine.ListField()
+    like_time = mongoengine.DateTimeField(default = timezone.now)
+    meta = {'collection': 'likes'}
+#
+# class Collects(mongoengine.Document):
+#     user = mongoengine.StringField()
+#     wkname = mongoengine.StringField()
+#     collect_time = mongoengine.DateTimeField(default = timezone.now)
+#     meta = {'collection': 'collections'}
 
 # 上传图片
 # class UserInfo(models.Model):

@@ -85,8 +85,8 @@ DATABASES = {
 
 }
 from mongoengine import connect
-connect('gushici', host='120.77.241.176', port=27017)
-
+# connect('gushici', host='120.77.241.176', port=27017)
+connect('gushici')
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 

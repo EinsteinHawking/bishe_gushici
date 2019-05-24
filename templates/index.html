@@ -6,11 +6,29 @@
     <meta charset="UTF-8">
     <title>主页</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/main1.css' %} ">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+
+    </script>
+
+    <script>
+        $(document).ready(function(){
+            $("#hide").click(function(){
+                $("p").hide(1000,"linear",function(){
+                alter("Hide()完成")
+                });
+            });
+
+            $("#show").click(function(){
+                $("p").toggle();
+            });
+        });
+
+    </script>
 </head>
 <body>
 <h1>hello,world</h1>
 
-<form action="/updateinfo" method="POST" enctype="multipart/form-data">
+<!--<form action="/updateinfo" method="POST" enctype="multipart/form-data">-->
 
             <div class="updateImg">
             <img src="{{ account.photo.url }}" alt=""/> </div>
@@ -61,7 +79,43 @@
           </a>
         </li>
         {% endif %}
+
   </ul>
+
+      {% for st in str %}
+        {{st}}<hr>
+      {% endfor %}
 </nav>
+    <button id="hide">隐藏</button>
+    <button id="show">显示</button>
+    <p>我是要隐藏的部分</p>
+
+
+
+    <a onclick="addTabs(this)">1111</a>
+    <a onclick="addTabs(this)">2222</a>
+    <a onclick="addTabs(this)">3333</a>
+    <a onclick="addTabs(this)">4444</a>
+    <a onclick="addTabs(this)">5555</a>
+    <br><br>
+    {% for tag in tags %}
+
+    <a style="color:black" onclick="addTabs(this)">{{tag.tag_name}}</a>
+    {% if forloop.counter|divisibleby:'4' %}
+    <br/><br/>
+    {% endif %}
+
+
+    {% endfor %}
+
+
 </body>
+
+<script type="text/javascript">
+
+        function addTabs(obj) {
+        var text = $(obj).text();
+        console.log(text);
+        }
+</script>
 </html>

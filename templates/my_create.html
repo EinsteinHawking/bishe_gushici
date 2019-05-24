@@ -16,9 +16,7 @@
 			<div class="sons">
 				<div class="cont">
 					<p>
-
-							<b>{{work.workname}}</b>
-
+						<b>{{work.workname}}</b>
 					</p>
 					<p class="source">
 						{{work.wk_dynasty}}
@@ -30,8 +28,12 @@
 					</div>
 				</div>
 				<div class="tool" style="width:550">
-					<div class="delete" style="float:right;margin-right:20px"><a href="{% url 'delete' %}"><img src="{% static 'img/删除.png' %}" class="icon" style="width:16px"></a></div>
+
+					<div class="delete" style="float:right;margin-right:20px"><a href="{% url 'del' work.workname %}"><img src="{% static 'img/删除.png' %}" class="icon" style="width:16px"></a></div>
+
+					<a>
 					<div class="delete" style="float:right;margin-right:20px"><a href="{% url 'delete' %}"><img src="{% static 'img/重新评卷.png' %}" class="icon" style="width:16px"></a></div>
+					</a>
 				</div>
 				<div class="tag">
 						<p style="float:right;font-size:13px;">{{work.wk_time}}</p>

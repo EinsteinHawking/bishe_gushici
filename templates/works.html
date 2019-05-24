@@ -9,11 +9,12 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}"/>
 	<link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}"/>
 	<link rel="stylesheet" type="text/css" href="{% static 'css/works.css' %}"/>
+	<link rel="stylesheet" href="https://unpkg.com/animate.css@3.5.2/animate.min.css"/>
 </head>
 
 <body>
 	<div id="main1" class="clearFix">
-		<div class="left">
+		<div class="left animated flipInX">
 			<h1>
 				<a href="poemLearning.html">诗词在线学习</a>
 			</h1>
@@ -54,7 +55,7 @@
 
 	<div id="main3" class="clearFix">
 		<div id="left">
-			<div class="titletype">
+			<div class="titletype animated fadeIn">
 				<div class="son1">
 					<h1>"不限"
 						<!--<span>1/1000+页</span>-->
@@ -64,7 +65,7 @@
 					<div class="sleft"><span>类型：</span></div>
 					<div class="sright">
 						{% for tag in tags %}
-						<a href="#" >{{tag.tag_name}}</a>
+						<a href="{% url 'tagfilt' tag.tag_name %}" >{{tag.tag_name}}</a>
 						{% endfor %}
 					</div>
 					<div class="sright2">
@@ -92,10 +93,10 @@
 				<div id="type3" class="son2">
 						<div class="sleft"><span>朝代：</span></div>
 						<div class="sright">
-							<a>先秦</a>
-							<a>两汉</a>
-							<a>魏晋</a>
-							<a>南北朝</a>
+							<a href="">先秦</a>
+							<a href="">两汉</a>
+							<a href="">魏晋</a>
+							<a >南北朝</a>
 							<a>隋代</a>
 							<a>唐代</a>
 							<a>五代</a>
@@ -115,38 +116,40 @@
 						<span>形式：</span>
 					</div>
 					<div class="sright">
-						<a>诗</a>
-						<a>词</a>
-						<a>歌</a>
-						<a>文言文</a>
+						<a href="">诗</a>
+						<a href="">词</a>
+						<a href="">歌</a>
+						<a href="">文言文</a>
 					</div>
 				</div>
 			</div>
 
 			{% for work in works %}
-			<div class="sons">
+			<div class="sons animated fadeIn">
 				<div class="cont">
 					<p>
-						<a href="#">
+						<a href="{% url 'tagfilt' work.name %}">
 							<b>{{work.name}}</b>
 						</a>
 					</p>
 					<p class="source">
-						<a href="#">{{work.dynasty}}</a>
+						<a href="{% url 'tagfilt' work.dynasty %}">{{work.dynasty}}</a>
 						<span>:</span>
-						<a href="#">{{work.author}}</a>
+						<a href="{% url 'tagfilt' work.author %}">{{work.author}}</a>
 					</p>
 					<div class="contson">
 						{{work.content}}
 					</div>
 				</div>
 				<div class="tool" style="width:550">
-					<div class="collecting" style="float:right"><img src="{% static 'img/未收藏.png' %}" class="icon" style="width:23px"></div>
+
+					<div class="collecting" style="float:right"><img src="{% static 'img/weishoucang.png' %}" class="icon" style="width:20px"></div>
+
 					<div class="like" style="float:right;margin-right:20px"><img src="{% static 'img/不喜欢.png' %}" class="icon" style="width:20px"></div>
 				</div>
 				<div class="tag">
 					{%for tag in work.tags%}
-					<a>{{tag}}</a>
+					<a href="{% url 'tagfilt' tag %}">{{tag}}</a>
 					{% endfor %}
 				</div>
 			</div>
@@ -182,7 +185,7 @@
 
 		</div>
 		
-	</div>
+
 </section>
 
 </body>

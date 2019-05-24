@@ -8,6 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}"/>
 	<link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}"/>
 	<link rel="stylesheet" type="text/css" href="{% static 'css/authors.css' %}"/>
+	<link rel="stylesheet" href="https://unpkg.com/animate.css@3.5.2/animate.min.css"/>
 
 </head>
 
@@ -15,7 +16,7 @@
 	<div id="main1" class="clearFix">
 		<div class="left">
 			<h1>
-				<a href="{% url 'main' %}">诗词在线学习</a>
+				<a href="{% url 'main' %}" class="animated flipInX">诗词在线学习</a>
 			</h1>
 		</div>
 		<div class="right">
@@ -52,7 +53,7 @@
 	<section>
 
 
-	<div id="main3" class="clearFix">
+	<div id="main3" class="clearFix animated fadeIn">
 		<div class="titletype" style="margin-bottom:40px;">
 			<div class="son1">
 				<h1>"不限"
@@ -87,7 +88,7 @@
 			<div class="sons" style="margin-top:20px;">
 				<div class="cont">
 					<p>
-						<a href="#">
+						<a href="{% url 'tagfilt' author.name %}">
 							<b>{{author.name}}</b>
 						</a>
 					</p>
@@ -105,8 +106,8 @@
 
 				</div>
 				<div class="tool" style="width:550">
-					<div class="collecting" style="float:right"><img src="{% static 'img/未收藏.png' %}" class="icon" style="width:23px"></div>
-					<div class="like" style="float:right;margin-right:20px"><img src="{% static 'img/不喜欢.png' %}" class="icon" style="width:20px"></div>
+					<!--<div class="collecting" style="float:right"><img src="{% static 'img/weishoucang.png' %}" class="icon" style="width:20px"></div>-->
+					<!--<div class="like" style="float:right;margin-right:20px"><img src="{% static 'img/不喜欢.png' %}" class="icon" style="width:20px"></div>-->
 				</div>
 				{% endfor %}
 
