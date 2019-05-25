@@ -1,7 +1,7 @@
 {% extends 'writeFromMemory.html' %}
 
 {% block con1 %}
-<section>
+<section xmlns="http://www.w3.org/1999/html">
 
 <div id="main3" class="clearFix animated fadeIn" >
             <div style="width:100%">
@@ -38,7 +38,7 @@
 					</div>
 				</div>
 
-				<textarea class="content">{{result}}{{title}}{{author}}{{content}}</textarea>
+				<div class="content" style="padding-top:40px;">{{result}}<br/>&nbsp;{{title}}<br/>{{author}}<br/>{{content}}</textarea>
 			</div>
 			<div class="result">
 				<!--<label>正确率：</label>-->

@@ -1,8 +1,10 @@
 <!doctype html>
+{% load staticfiles %}
 <html>
 <head>
-<meta charset="utf-8">
-<title>登录</title>
+	<meta charset="utf-8">
+	<title>登录</title>
+	<link rel="stylesheet" href="{% static 'swiper/dist/css/swiper.css' %}">
 <style type="text/css">
 *{
 	margin: 0;
@@ -40,7 +42,7 @@
 	position: absolute;
 	background-color: #FFFFFF;
 	top: 10%;
-	right: 15%;
+	right: 10%;
     border: 2px solid #5d6146;
 }
 
@@ -183,6 +185,29 @@
 	height: 24px;
 	width: 100%;
 }
+
+    <!--body {-->
+      <!--background: #fff;-->
+      <!--font-family: Helvetica Neue, Helvetica, Arial, sans-serif;-->
+      <!--font-size: 14px;-->
+      <!--color:#000;-->
+      <!--margin: 0;-->
+      <!--padding: 0;-->
+    <!--}-->
+    .swiper-container {
+      width: 640px;
+      height: 250px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+    }
+    .swiper-slide {
+      background-position: center;
+      background-size: cover;
+      width: 330px;
+      height: 250px;
+
+    }
+
 </style>
 </head>
  
@@ -193,6 +218,33 @@
 </div>
 	
 <div class="wrap" id="wrap">
+
+	<div class="swiper" style="height:300px;width:400px;position:absolute;top:15%;left:10%;">
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide" ><a href="{% url 'main' %}"><img src="{% static 'img/河北工大.jpg' %}" style="height: 100%;width:100%"></a></div>
+				<div class="swiper-slide" ><a href="{% url 'log' %}"><img src="{% static 'img/首页.jpg' %}" style="height: 100%;width:100%"></a></div>
+				<div class="swiper-slide" ><a href="{% url 'write' %}"><img src="{% static 'img/默写.png' %}" style="height: 100%;width:100%"></a></div>
+				<div class="swiper-slide" ><a href="{% url 'authors' %}"><img src="{% static 'img/诗人.png' %}" style="height: 100%;width:100%"></a></div>
+				<div class="swiper-slide" ><a href="{% url 'works' %}"><img src="{% static 'img/古诗词.jpg' %}" style="height: 100%;width:100%"></a></div>
+				<div class="swiper-slide" ><a href="{% url 'society' %}"><img src="{% static 'img/山水.jpg' %}" style="height: 100%;width:100%"></a></div>
+				<!-- <div class="swiper-slide" style="background-image:url(img/nature4.jpg)"></div>
+				<div class="swiper-slide" style="background-image:url(img/nature5.jpg)"></div>
+				<div class="swiper-slide" style="background-image:url(img/nature6.jpg)"></div>
+				<div class="swiper-slide" style="background-image:url(img/nature7.jpg)"></div>
+				<div class="swiper-slide" style="background-image:url(img/nature8.jpg)"></div>
+				<div class="swiper-slide" style="background-image:url(img/nature9.jpg)"></div>
+				<div class="swiper-slide" style="background-image:url(img/nature10.jpg)"></div> -->
+			</div>
+    	<!-- Add Pagination -->
+    	<div class="swiper-pagination"></div>
+  </div>
+
+
+	</div>
+
+
+
 	<div class="logGet">
 			<!-- 头部提示信息 -->
 		<form action="{% url 'login' %}" method="post">
@@ -253,7 +305,31 @@
   </div>
 	
 </div>
-	
+	  <!-- Swiper JS -->
+<script src="{% static 'swiper/dist/js/swiper.js' %}"></script>
+
+  <!-- Initialize Swiper -->
+  <script>
+    var swiper = new Swiper('.swiper-container', {
+      effect: 'coverflow',
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: 'auto',
+      autoplay:true,
+      loop:true,
+      speed:200,
+      coverflowEffect: {
+        rotate: 50,
+        stretch: 0,
+        depth: 100,
+        modifier: 1,
+        slideShadows : true,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+      },
+    });
+  </script>
 	
 </body>
 </html>

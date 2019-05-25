@@ -192,6 +192,11 @@ def show_au_page(request):
     allList = Author.objects
     paginator = Paginator(allList,6)
     page = paginator.page(pageid)
+
+    print(page)
+
+
+    total_pages = paginator.num_pages
     authors = Author.objects
     works = Work.objects
     #获取sessions
@@ -199,7 +204,7 @@ def show_au_page(request):
     sessions = Sessions.objects
     for a in sessions:
         username = a.session
-    return render(request, 'authors.html', {'username': username, 'authors': page, 'works': works})
+    return render(request, 'authors.html', {'username': username, 'authors': page,'end_page':total_pages, 'works': works})
 
 
 def show_authors(request,pageid):
@@ -214,8 +219,10 @@ def show_authors(request,pageid):
 
     allList = Author.objects
     paginator = Paginator(allList,6)
-    page = paginator.page(pageid)
-    return render(request,'authors.html',{'username':username,'authors':page,'works':works})
+    page = paginator.page(pageid)[:7]
+    print(page)
+    total_pages = paginator.num_pages
+    return render(request,'authors.html',{'username':username,'authors':page,'end_page':total_pages,'works':works})
 
 # 显示作品
 def show_wk_page(request):

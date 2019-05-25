@@ -16,7 +16,7 @@
 	<div id="main1" class="clearFix">
 		<div class="left animated flipInX">
 			<h1>
-				<a href="poemLearning.html">诗词在线学习</a>
+				<a href="{% url 'main' %}"  class="animated flipInX">诗词在线学习</a>
 			</h1>
 		</div>
 		<div class="right">
@@ -35,8 +35,8 @@
 						<a href="{% url 'main' %}">推荐</a>
 						<a href="{% url 'works' %}"  style="background-color:#acaf9b;border-bottom:3px solid #f0efe2;line-height:43px;height:43px;">名篇</a>
 						<a href="{% url 'authors' %}">名家</a>
-						<a href="{% url 'write' %}">在线默写</a>
-						<a href="{% url 'society' %}">诗词社区</a>
+						<a href="{% url 'write' %}">默写</a>
+						<a href="{% url 'society' %}">社区</a>
 					</div>
 					<div class="right1">
 						<div class="search">

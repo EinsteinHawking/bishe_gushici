@@ -131,4 +131,5 @@ STATICFILES_DIRS = [
     ("css",os.path.join(STATIC_ROOT,'CSS')),
     ("img",os.path.join(STATIC_ROOT,'img')),
     ("assets",os.path.join(STATIC_ROOT,'assets')),
+    ("swiper",os.path.join(STATIC_ROOT,'swiper')),
 ]

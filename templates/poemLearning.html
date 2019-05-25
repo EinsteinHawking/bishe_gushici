@@ -9,6 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}"/>
 	<link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}"/>
 	<link rel="stylesheet" href="https://unpkg.com/animate.css@3.5.2/animate.min.css"/>
+	<link rel="stylesheet" href="{% static 'swiper/dist/css/swiper.css' %}">
 
 </head>
 
@@ -35,8 +36,8 @@
 						<a href="{% url 'main' %}" style="background-color:#acaf9b;border-bottom:3px solid #f0efe2;line-height:43px;height:43px;">推荐</a>
 						<a href="{% url 'works' %}">名篇</a>
 						<a href="{% url 'authors' %}">名家</a>
-						<a href="{% url 'write' %}">在线默写</a>
-						<a href="{% url 'society' %}">诗词社区</a>
+						<a href="{% url 'write' %}">默写</a>
+						<a href="{% url 'society' %}">社区</a>
 					</div>
 					<div class="right1">
 						<div class="search">
@@ -133,8 +134,26 @@
 			</div>
 
 		</div>
-		<div id="right">
+		<div id="right" class="animated bounceInRight" style="margin-right:50px">
 			<div class="rightson">
+					<div style="height:180px;width:310px;background-color:red;margin-top:55px">
+						<div class="swiper-container" style="height:100%;width:100%">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide"><img src="{% static 'img/故宫.jpg' %}" style="height: 100%;width:100%"></div>
+							<div class="swiper-slide"><img src="{% static 'img/山水.jpg' %}" style="height: 100%;width:100%"></div>
+							<div class="swiper-slide"><img src="{% static 'img/天坛.jpg' %}" style="height: 100%;width:100%"></div>
+						</div>
+						<!-- 如果需要分页器 -->
+						<div class="swiper-pagination"></div>
+
+						<!-- 如果需要导航按钮 -->
+						<!-- <div class="swiper-button-prev"></div>
+						<div class="swiper-button-next"></div> -->
+
+						<!-- 如果需要滚动条 -->
+						<div class="swiper-scrollbar"></div>
+					</div>
+					</div>
 					<div class="sons">
 							<div class="title">诗文关键词</div>
 						<br/><br/>
@@ -175,6 +194,36 @@
 		
 	</div>
 </section>
+<script src="{% static 'swiper/dist/js/swiper.js' %}"></script>
+<script>
+    var mySwiper = new Swiper ('.swiper-container', {
+    direction: 'horizontal', // 垂直切换选项
+    loop: true, // 循环模式选项
+    autoplay:true,
 
+    // 如果需要分页器
+    pagination: {
+      el: '.swiper-pagination',
+    },
+
+    // 如果需要前进后退按钮
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+
+    // 如果需要滚动条
+    scrollbar: {
+      el: '.swiper-scrollbar',
+    },
+    on:{
+    autoplay:function(){
+        // autoplay: 3000,//自动切换的时间间隔（单位ms），不设定该参数slide不会自动切换。
+        // autoplayDisableOnInteraction: false,//点击后打断auto-play
+      },
+    }
+
+  })
+</script>
 </body>
 </html>
