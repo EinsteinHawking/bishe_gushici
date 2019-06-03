@@ -126,17 +126,11 @@ def logsign(request):
     return render(request,'login.html')
 
 def log(request):
-    u_name = request.POST.get('form-username')
+    u_phone = request.POST.get('form-username')
     password = request.POST.get('form-password')
+
     # 存储session
-    sess = Sessions()
-    sess.session = u_name
-    sess.save()
-    sessions = Sessions.objects
-    print(sessions)
-    for a in sessions:
-        username = a.session
-        print(username)
+
 
     works = Work.objects
     tags1 =Tags.objects
@@ -147,21 +141,31 @@ def log(request):
     paginator = Paginator(allList,6)
     #首页显示第一页
     page = paginator.page(1)
-    print(u_name)
+
     print(password)
-    user = User.objects(username=u_name)
+    user = User.objects(phone=u_phone)
+    pwd =''
     for a in user:
         pwd = a.password
 
 
     if user:
         if password == pwd:
+            sess = Sessions()
+            for a in user:
+                sess.session = a.username
+            sess.save()
+            sessions = Sessions.objects
+            print(sessions)
+            for a in sessions:
+                username = a.session
+                print(username)
             return redirect('/')
             # return render(request,'login.html',{'check':False})
         else:
             return render(request,'login.html',{'check':True,'item':'密码'})
     else:
-        return render(request,'login.html',{'check':True,'item':'账号'})
+        return render(request,'login.html',{'check':True,'item':'手机号'})
 
 
 
@@ -543,7 +547,11 @@ def starttiankong(request):
         for work in works:
             cont = work.content
             # arr1 = cont.split("。|!|?")   #python 内建的split只能使用单个分隔符
+            cont = cont.replace('<br>','')
+
             arr1 = re.split(r'[。？！]',cont)
+
+
             print(arr1)
 
             for str in arr1:
@@ -557,6 +565,9 @@ def starttiankong(request):
     else:
         return render(request, 'tiankong.html', {'error': '该篇诗词不存在，请换一篇默写！','username':username})
 
+
+def restarttiankong(request):
+    return redirect('/tiankong/')
 
 def tagswk(request,tagname):
 

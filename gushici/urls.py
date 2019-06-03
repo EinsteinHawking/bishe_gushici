@@ -43,7 +43,7 @@ urlpatterns = [
 
     path('tiankong/',views.tiankong,name='tiankong'),
     path('tiankong/start/',views.starttiankong,name='start'),
-
+    path('tiankong/start/start/',views.restarttiankong),
     path('like/<str:workname>',views.safelike,name='like'),
     path('collect/<str:workname>',views.safecollect,name='collect'),
 

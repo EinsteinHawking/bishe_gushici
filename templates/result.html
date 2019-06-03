@@ -71,7 +71,7 @@
 						<a href="{% url 'tagfilt' work.author %}">{{work.author}}</a>
 					</p>
 					<div class="contson">
-						{{work.content}}
+						{{work.content|safe}}
 					</div>
 				</div>
 				<div class="tool">

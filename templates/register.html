@@ -165,6 +165,82 @@
 	width: 100%;
 }
 </style>
+
+<script type="text/javascript">
+    //邮箱验证
+    function checkEmail()
+    {
+     var email=document.logonForm.userid.value;
+     var emailError=document.getElementById("emailerror");
+     var d=email.indexOf("@");
+     var v=email.indexOf(".");
+
+     if(d==-1||v==-1||(v-d)<=1||email.charAt(0)=="@"||v==email.length-1)
+     {
+      emailError.innerHTML="邮箱格式不正确！";
+     }
+    else
+     {
+      emailError.innerHTML="";
+     }
+    }
+
+     //密码验证
+    function checkpwd()
+    {
+     var pwdError=document.getElementById("pwdError");
+     var pwd=document.getElementById("pwd").value;
+
+     if(pwd.length<6 || pwd.length>16)
+     {
+     pwdError.innerHTML="密码应为6--16个字符！";
+
+     }
+     else
+     {
+     pwdError.innerHTML="";
+     }
+    }
+
+	function verifypwd()
+    {
+     var pwdError=document.getElementById("verifyError");
+
+     var pwd1=document.getElementById("pwd").value;
+	 var pwd2=document.form1.check_password.value;
+	 <!--alert(pwd1+"和"+pwd2);-->
+	 if(pwd1==""){
+		alert("请输入密码！");//检测到密码为空，提醒输入//
+		document.form1.login_password.focus();//焦点放到密码框
+		return false;//退出检测函数
+	 }//如果允许空密码，可取消这个条件
+	 if(pwd1!=pwd2){//判断两次输入的值是否一致，不一致则显示错误信息
+	 	document.getElementById("verifyError").innerHTML="两次输入密码不一致，请重新输入";//在div显示错误信息
+		return false;
+	 }else{
+	 	pwdError.innerHTML="";
+		//密码一致，可以继续下一步操作
+	 }
+	 }
+	function checknum()
+    {
+     var pwdError=document.getElementById("phoneError");
+     var num=document.getElementById("num").value;
+
+     if(num.length != 11)
+     {
+     phoneError.innerHTML="手机号码应为11位，请重新输入！";
+
+     }
+     else
+     {
+     phoneError.innerHTML="";
+     }
+    }
+
+</script>
+
+
 </head>
  
 <body>
@@ -174,7 +250,7 @@
 </div>
 	
 <div class="wrap" id="wrap">
-	<form action="register/" method="post">
+	<form action="register/" method="post" name="form1">
 	<div class="logGet">
 			<!-- 头部提示信息 -->
 			<div class="logD logDtip">
@@ -189,17 +265,20 @@
 			<div class="lgD">
 				<img src="img/logPwd.png" width="20" height="20" alt=""/>
 				<input type="text"
-					placeholder="输入用户密码" name="login_password" />
+					placeholder="输入用户密码" name="login_password" onblur="checkpwd()" id="pwd"/>
+				<a><span class="fade" id="pwdError"></span></a>
 			</div>
 			<div class="lgD">
 				<img src="img/logPwd.png" width="20" height="20" alt=""/>
 				<input type="password"
-					placeholder="再次输入，确认密码" name="check_password" />
+					placeholder="再次输入，确认密码" name="check_password" onblur="verifypwd()"/>
+				<a><span class="fade" id="verifyError"></span></a>
 			</div>
 			<div class="lgD">
 				<img src="img/logName.png" width="20" height="20" alt=""/>
 				<input type="text"
-					placeholder="输入手机号" name="phonenumber" />
+					placeholder="输入手机号" name="phonenumber" id="num" onblur="checknum()"/>
+				<a><span class="fade" id="phoneError"></span></a>
 			</div>
 
 			<div class="logC">
