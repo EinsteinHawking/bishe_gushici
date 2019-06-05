@@ -1,9 +1,26 @@
 {% extends 'writeFromMemory.html' %}
+{% block jquery %}
 
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+
+    </script>
+
+    <script>
+
+        $(document).ready(function(){
+
+            $("#show").click(function(){
+                $("#highlight").toggle(200);
+            });
+        });
+
+    </script>
+
+{% endblock jquery %}
 {% block con1 %}
 <section xmlns="http://www.w3.org/1999/html">
 
-<div id="main3" class="clearFix animated fadeIn" >
+<div id="main3" class="clearFix animated fadeIn" style="margin-bottom:20px">
             <div style="width:100%">
             <div style="float:right;margin-top:10px;margin-right:100px;line-height:2;height:30px;">
                 <a href="{% url 'tiankong' %}" style="color: #5d6141"><strong style="font-weight:bolder;">切换到</strong>填空模式</a>
@@ -38,19 +55,35 @@
 					</div>
 				</div>
 
-				<div class="content" style="padding-top:40px;">{{result}}<br/>&nbsp;{{title}}<br/>{{author}}<br/>{{content}}</textarea>
-			</div>
-			<div class="result">
-				<!--<label>正确率：</label>-->
-				<!--<label>80%</label>-->
+				<div class="content" style="padding-top:40px;overflow:scroll;">
+
+					{{result}}<br/>&nbsp;<br/>&nbsp;{{title}}<br/>{{author}}<br/>{{content|safe}}
+
+				</div>
+			{% if ratio %}
+			<div class="result" style="height:40px;line-height:2">
+				<!--<label >正确率：</label>-->
+
+				<label id="show">正确率：{{ratio}}%</label>
+
 			</div>
 
+			{% endif %}
+
+			</div>
+			<div id="highlight" style="width:630px;background-color:white;margin-top:100px;text-align:center;display:none">
+			<div class="highlight" style="width:300px;margin:auto" >
+				{{diff|safe}}
+			</div>
+			</div>
 		</div>
 		</form>
 
-
-
 	</div>
+
+
+
+
 </section>
 <!--
 	<div class="main4">

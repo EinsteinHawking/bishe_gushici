@@ -1,30 +1,17 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-
+from difflib import SequenceMatcher
 from .models import User,Work,Author,Tags,Sessions,Likes,Collections
 
 from django.core.paginator import Paginator
+
+import difflib
 # Create your views here.
 
 ##测试函数
 def test(request):
 
-    # # name = ['lang','li','lu','bai','wang']
-    # s ='lang'
-    # a = User.objects(username = s)
-    # for user in a:
-    #     print(a.password)
-    #
-    # #分页
-    # # allList = Work.objects
-    # # paginator = Paginator(allList,10)
-    # # page = paginator.page(pageid)
-    # authors = Author.objects
-    # allList = Author.objects
-    # paginator = Paginator(allList,6)
-    # page = paginator.page(2)
-    #
-    # return render(request,'index.html',{'cus_list':page})
+
     a = 'hello'
 
     works = Work.objects(name = '赵将军歌')
@@ -33,7 +20,6 @@ def test(request):
         cont = work.content
         arr1 = cont.split("。")
 
-        # print(arr1[1])
 
         for str in arr1:
             arr2 = str.split('，')
@@ -41,12 +27,34 @@ def test(request):
                 arr.append(st)
             print(arr2)
     tags = Tags.objects
-    return render(request,'index.html',{'str':arr,'tags':tags})
+
+    # 计算正确率
+    str1 = '静夜思李白，举头望明月'
+    str2 = '静夜思李白，<br>举头望太阳'
+    s = SequenceMatcher()
+    str2 =str2.replace('<br>','')
+    print(str2)
+    s.set_seqs(str1, str2)
+    r = s.ratio()
+    r = r*100
+    r = int(r)
+
+    # 错误字段高亮显示
+    str1 = str1.replace('，','\r')
+    str1 = str1.replace('。','\n')
+    str2 = str2.replace('，','\r')
+    str2 = str2.replace('。','\n')
+    str1 = str1.splitlines()
+    str2 = str2.splitlines()
+    d = difflib.HtmlDiff()
+    diff = d.make_file(str1, str2,context=True, fromdesc='你的默写', todesc='正确答案',)
+
+    return render(request,'index.html',{'str':r,"diff":diff})
 
 #跳转到指定页的页面
 def index_page(request,pageid):
     print(pageid)
-    allList = Work.objects
+    allList = Work.objects.order_by("likecount")
     paginator = Paginator(allList,6)
     total_pages = paginator.num_pages
     page = paginator.page(pageid)
@@ -59,11 +67,13 @@ def index(request):
 
     user=None
     works = Work.objects
+    for w in works:
+        print(w.name)
     tags1 =Tags.objects
     tags = list(set(tags1))
     n = 0
     #实现分页
-    allList = Work.objects
+    allList = Work.objects.order_by("-likecount")
     paginator = Paginator(allList,6)
 
     #测试paginator
@@ -91,15 +101,11 @@ def index(request):
 
     #获取session
     username = ''
-#   username =request.session.get('name')
     sessions = Sessions.objects
-    # print(sessions)
     for a in sessions:
         username = a.session
-        # print(username)
-    # print(username)
-    lks = []
 
+    lks = []
     likes =Likes.objects
 
     for like in likes:
@@ -223,7 +229,7 @@ def show_authors(request,pageid):
 
     allList = Author.objects
     paginator = Paginator(allList,6)
-    page = paginator.page(pageid)[:7]
+    page = paginator.page(pageid)
     print(page)
     total_pages = paginator.num_pages
     return render(request,'authors.html',{'username':username,'authors':page,'end_page':total_pages,'works':works})
@@ -295,9 +301,17 @@ def checkwrite(request):
 
     result = Work.objects(name=q_title)
     if result:
+        #存储到我的默写里
         write = Writes()
-        if(Writes.objects(workname=q_title)):
+        #如果我的默写里存在该首诗，则不保存
+        name =''
+        isnothas = Writes.objects(workname=q_title)
+        for a in isnothas:
+            name = a.workname
+
+        if(name == q_title):
             print(write)
+        #否则保存这首诗
         else:
             write.username = username
             write.workname = q_title
@@ -307,19 +321,71 @@ def checkwrite(request):
                 write.wk_content = wk.content
             write.save()
             print(write)
-
+        #判断是否默写正确
         for work in result:
             a = work.name
             b = work.author
             if q_author != b:
                 return render(request, 'quanpian.html', {'result': '作者写错了','username':username})
             c = work.content
-            if q_content != c:
-
-                return render(request, 'quanpian.html', {'result': '内容有错，快来核对一下','username':username,'q_c':q_content, 'title':a,'author':b,'content': c })
+            answer = c
+            print('1:\n'+c)
+            #content 正确的诗词去除标点符号
+            c = str(c).replace('<br>','')
+            c = str(c).replace('<br>', '')
+            c = str(c).replace('，','')
+            c = str(c).replace('。','')
+            c = str(c).replace('！', '')
+            c = str(c).replace('\n', '')
+            #write_work 书写的诗词去除标点符号
+            print('2:\n' + c)
+            ww = q_content
+            print('3.0:\n' + ww)
+            ww = ww.replace('，', '')
+            print('3.1:\n' + ww)
+            ww = ww.replace('。', '')
+            print('3.2:\n' + ww)
+            ww = ww.replace('！', '')
+            print('3.3:\n' + ww)
+            ww = ww.replace('？', '')
+            print('3.4:\n' + ww)
+            ww = ww.replace('\r\n', '')
+            print('3:\n' + ww)
+            s = SequenceMatcher()
+            s.set_seqs(c, ww)
+            r = s.ratio()
+            r = r * 100
+            r = int(r)
+            print(r)
+            #highlight_answer 高亮的答案
+            hla = answer
+            hla = hla.replace('<br>', '')
+            hla = hla.replace('，', '\n')
+            hla = hla.replace('。', '\n')
+            hla = hla.replace('？', '\n')
+            hla = hla.replace('！', '\n')
+            hla = hla.strip()
+            print('4:\n' + hla)
+            #highlight_write 高亮的默写
+            hlw = q_content
+            hlw = hlw.replace('，', '\n')
+            hlw = hlw.replace(',', '\n')
+            hlw = hlw.replace('。', '\n')
+            hlw = hlw.replace('？', '\n')
+            hlw = hlw.replace('！', '\n')
+            print('5:\n' + hlw)
+            str1 = hlw.splitlines()
+            str2 = hla.splitlines()
+            print('6:')
+            print(str1)
+            print('7:')
+            print(str2)
+            d = difflib.HtmlDiff()
+            diff = d.make_file(str1, str2, context=True, fromdesc='你的默写', todesc='正确答案', )
+            if c != ww:
+                return render(request, 'quanpian.html', {'result': '内容有错，快来核对一下','username':username,'q_c':q_content, 'title':a,'author':b,'content': answer,'ratio':r,'diff':diff})
             else:
-
-                return render(request, 'quanpian.html',{'result': '恭喜你！全对了','username':username,'q_c':q_content, 'title': a, 'author': b, 'content': c })
+                return render(request, 'quanpian.html',{'result': '恭喜你！全对了','username':username,'q_c':q_content, 'title': a, 'author': b, 'content': answer,'ratio':r,'diff':diff })
     else:
         return render(request,'quanpian.html',{'result':'题目写错了','username':username})
 
@@ -394,6 +460,30 @@ def updateinfo(request):
 
     return render(request,'update_userinfo.html',{'username':username})
 
+def updateSafe(request):
+    new_username = request.POST.get('username')
+    new_phonenum = request.POST.get('phonenumber')
+    new_password = request.POST.get('login_password')
+    name = ''
+    sessions = Sessions.objects
+    for a in sessions:
+        name = a.session
+    user = User.objects(username=name)
+    for u in user:
+        if new_username:
+            u.username = new_username
+            sessions = Sessions.objects
+            for a in sessions:
+                a.session =new_username
+                a.save()
+        if new_password:
+            u.password = new_password
+        if new_phonenum:
+            u.phone = new_phonenum
+        u.save()
+
+
+    return redirect('/update/')
 def mycoll(request):
     # 获取sessions
     username = ''
@@ -402,7 +492,7 @@ def mycoll(request):
         username = a.session
     # works = Work.objects[4:8]
 
-    colls = Collections.objects
+    colls = Collections.objects.order_by("-collect_time")
     return render(request, 'my_coll.html',{'username':username,'works':colls})
 
 def mylike(request):
@@ -414,7 +504,7 @@ def mylike(request):
     works = Work.objects
     print(works)
 
-    likes = Likes.objects(user=username)
+    likes = Likes.objects(user=username).order_by("-like_time")
     print(likes)
 
 
@@ -427,7 +517,7 @@ def mycreate(request):
     for a in sessions:
         username = a.session
 
-    write = Writes.objects(username=username)
+    write = Writes.objects(username=username).order_by("-wk_time")
 
     return render(request, 'my_create.html',{'username':username,'works':write})
 
@@ -439,7 +529,7 @@ def showput(request):
     create =Creates.objects(user=username)
     for c in create:
         print(c.id)
-    return render(request, 'my_put.html', {'username': username, 'creates': create.order_by('cteate_time')})
+    return render(request, 'my_put.html', {'username': username, 'creates': create.order_by('-cteate_time')})
 
 from .models import Creates
 def show_society(request):
@@ -447,7 +537,7 @@ def show_society(request):
     sessions = Sessions.objects
     for a in sessions:
         username = a.session
-    creates = Creates.objects
+    creates = Creates.objects.order_by("-create_time")
     return render(request,'society.html',{'username':username,'creates':creates})
 
 def society(request):
@@ -608,6 +698,10 @@ def safelike(request,workname):
     if Likes.objects(wkname=workname):
 
         lks = Likes.objects(wkname=workname)
+        wks = Work.objects(name=workname)
+        for l in wks:
+            l.likecount = l.likecount-1
+            l.save()
         lks.delete()
 
 
@@ -615,10 +709,13 @@ def safelike(request,workname):
 
         like = Likes()
         like.wkname = workname
-        print(workname)
         like.user = username
-        print(username)
+
         wks = Work.objects(name=workname)
+        for l in wks:
+            l.likecount = l.likecount + 1
+            print("喜欢的个数："+str(l.likecount))
+            l.save()
         for wk in wks:
             like.author=wk.author
             like.dynasty=wk.dynasty
@@ -649,13 +746,9 @@ def safecollect(request,workname):
         username = a.session
 
     if Collections.objects(wkname=workname):
-
         lks = Collections.objects(wkname=workname)
         lks.delete()
-
-
     else:
-
         colls = Collections()
         colls.wkname = workname
         wks = Work.objects(name=workname)
@@ -668,13 +761,12 @@ def safecollect(request,workname):
         colls.user = username
         # print(username)
         colls.save()
-
-
         l = Collections.objects
         print(l)
 
     return redirect("/")
 
-
+def review(request):
+    return redirect('/write/')
 
 

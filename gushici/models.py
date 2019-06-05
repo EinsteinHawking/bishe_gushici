@@ -9,7 +9,8 @@ class New_Manage(models.Manager):
 '''
 
 class User(mongoengine.Document):
-    username = mongoengine.StringField(primary_key=True)
+    username = mongoengine.StringField()
+    # primary_key = True
     password = mongoengine.StringField(max_length=20)
     #picture = mongoengine.StringField()
     phone = mongoengine.IntField()
@@ -25,9 +26,11 @@ class Work(mongoengine.Document):
     dynasty = mongoengine.StringField()
     content = mongoengine.StringField()
     tags = mongoengine.ListField()
+    likecount = mongoengine.IntField(default=0)
     # islike = mongoengine.BooleanField()
     # iscollect = mongoengine.BooleanField()
     wk_objs = models.Manager()
+
     meta = {'collection':'works'}
 
 class Author(mongoengine.Document):

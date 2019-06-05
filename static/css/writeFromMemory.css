@@ -1,6 +1,9 @@
 #main3 #left {
     margin-top: 30px;
 }
+#main3 #right {
+    margin-top: 60px;
+}
 
 #main3 #left .top {
     margin-top: 30px;
@@ -72,6 +75,6 @@
     background-color: #fff;
     margin-top: 60px;
     margin-bottom: 60px;
-    width: 100px;
+    width: 110px;
     float: right;
 }

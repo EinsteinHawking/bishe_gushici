@@ -67,19 +67,19 @@
 				</div>
 				<div class="sright">
 					<span>不限</span>
-							<a>先秦</a>
-							<a>两汉</a>
-							<a>魏晋</a>
-							<a>南北朝</a>
-							<a>隋代</a>
-							<a>唐代</a>
-							<a>五代</a>
-							<a>宋代</a>
-							<a>金朝</a>
-							<a>元代</a>
-							<a>明代</a>
-							<a>清代</a>
-							<a>近现代</a>
+							<a href="{% url 'tagfilt' '先秦' %}">先秦</a>
+							<a href="{% url 'tagfilt' '两汉' %}">两汉</a>
+							<a href="{% url 'tagfilt' '魏晋' %}">魏晋</a>
+							<a href="{% url 'tagfilt' '南北朝' %}">南北朝</a>
+							<a href="{% url 'tagfilt' '隋代' %}">隋代</a>
+							<a href="{% url 'tagfilt' '唐代' %}">唐代</a>
+							<a href="{% url 'tagfilt' '五代' %}">五代</a>
+							<a href="{% url 'tagfilt' '宋代' %}">宋代</a>
+							<a href="{% url 'tagfilt' '金朝' %}">金朝</a>
+							<a href="{% url 'tagfilt' '元代' %}">元代</a>
+							<a href="{% url 'tagfilt' '明代' %}">明代</a>
+							<a href="{% url 'tagfilt' '清代' %}">清代</a>
+							<a href="{% url 'tagfilt' '近现代' %}">近现代</a>
 				</div>
 			</div>
 		</div>
@@ -109,9 +109,9 @@
 					<div class="collecting" style="float:right"><img src="{% static 'img/weishoucang.png' %}" class="icon" style="width:20px"></div>
 					<div class="like" style="float:right;margin-right:20px"><img src="{% static 'img/不喜欢.png' %}" class="icon" style="width:20px"></div>
 				</div>
-				{% endfor %}
-
-				<div class="page">
+			</div>
+			{% endfor %}
+			<div class="page">
 			<a href="{% url 'main' %}" class="home">首页</a>
 
 			{% if authors.has_previous %}
@@ -142,7 +142,7 @@
 			</div>
 
 
-			</div>
+
 
 		</div>
 		

@@ -23,8 +23,10 @@ urlpatterns = [
     path('search/',views.search),
     # path('search/<int:pageid>',views.search_page,name='result'),
     path('update/',views.updateinfo,name='update'),
+    path('update/register/',views.updateSafe,name='updatesafe'),
     path('like/',views.mylike,name='like'),
     path('create/',views.mycreate,name='create'),
+    path('create/review/',views.review,name="restart"),
     path('u/',views.mycoll,name='user_web'),
     path('society/',views.show_society,name='society'),
     path('society/creations/',views.society,name='safe_put'),
@@ -37,7 +39,6 @@ urlpatterns = [
 
     path('delcre/<str:putid>',views.delete_cre,name="delcre"),
 
-
     path('tag/',views.show_tag,name='showtag'),
     path('tag/<str:tagname>',views.tagswk,name='tagfilt'),
 
@@ -46,5 +47,7 @@ urlpatterns = [
     path('tiankong/start/start/',views.restarttiankong),
     path('like/<str:workname>',views.safelike,name='like'),
     path('collect/<str:workname>',views.safecollect,name='collect'),
+
+
 
 ]
